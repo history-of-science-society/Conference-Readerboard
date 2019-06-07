@@ -1,0 +1,47 @@
+.session-container {
+    margin-top: 50px;
+    padding: 0 4vw;
+
+    font-size: 1em;
+    // height: 500px;
+}
+
+.session-title-container {
+    align-items: center;
+    display: flex;
+    margin-bottom: .5em;
+
+    font-size: 1.8em;
+    font-weight: 100;
+    transform: translateX(-100%);
+    transition: transform .2s;
+
+    >p {
+        margin: 0;
+    }
+}
+
+.stc-active {
+    transform: translateX(0);
+
+}
+
+.session-title {
+    flex: 1;
+
+}
+
+.track,
+.location {
+    padding: 5px 7px;
+    font-size: .75em;
+}
+
+.track-format {
+    padding: 5px 7px;
+    background: $yellow;
+    color: $black;
+}
+
+
+

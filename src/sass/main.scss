@@ -1,0 +1,36 @@
+// Variables
+@import 'variables';
+
+// Global styles
+html,
+body,
+ul,
+ol {
+  margin:  0;
+  padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+// General Styles
+html {
+    background: $black;
+    color: $white;
+    font-family: $sans;
+    font-size: 1em;
+}
+
+
+
+// Imports
+
+@import 'header';
+@import 'body';
+
+
+
+
+
+
