@@ -4,6 +4,7 @@
 const sessions = document.querySelectorAll('.session-title');
 const tracks = document.querySelectorAll('.track');
 const locations = document.querySelectorAll('.location');
+const sessTime = document.querySelectorAll('.session-time');
 
 
 // For months
@@ -25,15 +26,21 @@ fetch('../dist/csv/convertcsv.json')
         })
 
         tracks.forEach(function (e, i) {
-            let track = program[i]['Session Track'] == "" ? "" : `<span class="track-format ${program[i]['Session Track']}">${program[i]['Session Track']}</span>`;
+            let track = `${program[i]['Session Track']}`;
 
             e.innerHTML = track;
         })
 
         locations.forEach(function (e, i) {
-            let location = program[i]['Venue'] == "" ? "" : `<span class="venue-format ${program[i]['Venue']}">📍 ${program[i]['Venue']}</span>`;
+            let location = `${program[i]['Venue']}`;
 
             e.innerHTML = location;
+        })
+
+        sessTime.forEach(function (e, i) {
+            let sessStart = `${program[i]['Start Time']}&ndash;${program[i]['End Time']}`;
+
+            e.innerHTML = sessStart;
         })
 
     }).then
@@ -64,11 +71,11 @@ function setTime() {
     let now = new Date();
     let date = addZero(now.getDate());
     let month = spellMonth(now.getMonth());
-    let hour = addZero(now.getHours());
+    let hour = addZero(now.getHours()); 
     let min = addZero(now.getMinutes());
 
     timeDiv.innerHTML = `🕥&nbsp;${hour}:${min}`;
-    dateDiv.innerHTML = `📆&nbsp;${date} ${month} ${now.getFullYear()}`;
+    dateDiv.innerHTML = `📅&nbsp;${date} ${month} ${now.getFullYear()}`;
 
     let interval = setTimeout(setTime, 500);
 
@@ -84,6 +91,9 @@ let slideIn = document.querySelectorAll('.session-title-container');
 
 slideIn.forEach(e => e.classList.add('stc-active'))
 
+
+
+// Weather
 function icon(weatherID) {
 
     switch (weatherID.charAt(0)) {
@@ -131,7 +141,7 @@ fetch(weatherURL)
             return Math.trunc((x - 32) * 5 / 9);
         }
 
-        
+
 
         let emoji = icon(weatherDesc);
         // console.log(emoji);
@@ -139,7 +149,7 @@ fetch(weatherURL)
 
         weather.innerHTML = `${emoji} ${tempF}&deg; F (${celsius(tempF)}&deg; C)
         `;
-        
+
         // Low: ${min}&deg; F (${celsius(min)}&deg; C) F / HIGH: ${max}&deg; F (${celsius(max)}&deg; C) `;
 
 
