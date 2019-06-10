@@ -10,74 +10,60 @@ ol {
   box-sizing: border-box; }
 
 html {
-  background: #030614;
-  color: #FFF9E6;
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", "Segoe UI", sans-serif;
-  font-size: 1em; }
+  background: #020f16;
+  color: #fefffe;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", "Segoe UI", sans-serif;
+  font-size: calc(1em + .25vw); }
 
-.header-image-container {
-  display: flex;
-  height: 250px;
-  width: 100%;
-  background: url("https://images.unsplash.com/photo-1522072108193-60feb63c50cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80") left no-repeat;
-  background-size: cover;
-  border-bottom: 2px solid #1934b3; }
-
-.header-image-cover {
+.header-container {
   align-items: center;
   display: flex;
-  flex-flow: column;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.65); }
+  height: 3em;
+  padding: .5em 4vw;
+  justify-content: space-between;
+  background: #ffd557;
+  color: #020f16; }
 
 .brand-container {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  align-content: center; }
-  .brand-container img {
-    height: 5em;
-    margin-right: 15px; }
+  display: flex;
+  color: #020f16;
+  text-decoration: none; }
+  .brand-container > img {
+    height: 2.5em;
+    margin-right: 5px; }
 
 .brand {
   margin: 0;
   padding: 0;
-  font-size: 5rem;
+  font-size: 2em;
   font-weight: 700;
   font-family: 'Adobe Garamond Pro', Garamond, Georgia, serif;
-  letter-spacing: 3px;
-  transform: translateY(-1rem); }
+  letter-spacing: 2px;
+  transform: translateY(3px); }
 
 .meeting {
   margin: 0;
-  padding: 5px 10px;
-  position: absolute;
-  bottom: 0;
-  background: #1934b3;
-  color: #FFF9E6;
-  font-size: 2rem;
+  padding: 0;
+  font-size: 1.5rem;
   font-weight: 700;
-  text-transform: uppercase;
-  transform: translateY(1.5rem); }
+  text-transform: uppercase; }
 
 .time-container {
   align-content: center;
   align-items: center;
   display: flex;
-  height: 150px;
+  height: 3.5em;
   justify-content: center;
-  padding: 2vw 4vw 1vw;
-  font-size: 2em; }
+  padding: 1em 4vw;
+  font-size: 1.5em; }
 
 .date,
 .time,
 .weather {
   margin: 0 1em;
-  font-size: 1.6em;
-  font-weight: 300;
-  transition: 1s; }
+  font-size: 1.2em;
+  font-weight: 300; }
   .date > p,
   .time > p,
   .weather > p {
@@ -88,19 +74,17 @@ html {
   display: flex;
   flex: 1;
   justify-content: space-between;
-  padding: 1vw 4vw;
-  font-size: 1.5em; }
+  padding: 1em 4vw;
+  font-size: 1em; }
 
 .info {
   align-items: stretch;
   display: flex;
   flex: 1;
   flex-flow: column;
-  width: 100%;
   height: 100px;
   margin: 0 1em;
-  border: 1px solid #1934b3;
-  font-size: 1em;
+  border: 1px solid #0b3954;
   text-align: center;
   text-transform: uppercase; }
   .info:first-child {
@@ -114,8 +98,7 @@ html {
   height: 50%;
   justify-content: center;
   margin: 0;
-  padding: .5em 0;
-  background: #1934b3; }
+  background: #0b3954; }
 
 .info-status {
   align-items: center;
@@ -125,56 +108,81 @@ html {
   justify-content: center; }
 
 .open::before {
-  content: "✅";
+  content: "✔️";
   margin-right: 5px; }
 
 .session-container {
-  margin-top: 50px;
-  padding: 0 4vw;
-  font-size: 1em; }
+  padding: 0 4vw; }
   .session-container > h2 {
-    font-size: 1.8em; }
+    margin: .5em 0 0;
+    padding: .5em;
+    background: #0b3954;
+    color: #fefffe;
+    font-size: 1.2em; }
 
 .session-title-container {
+  align-items: center;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 1em;
-  padding-bottom: .5em;
-  border-bottom: 2px solid #5775ff;
-  font-size: 1.7em;
-  font-weight: 100;
+  margin-bottom: .5;
+  font-size: 1.2em;
+  font-weight: 400;
   transform: translateX(-100%);
   transition: transform .2s; }
-  .session-title-container > p {
-    margin: 0; }
-
-.sub-info {
-  display: flex;
-  flex: 1;
-  align-items: center; }
-  .sub-info > p {
-    margin: 5px 0 0 50px; }
-  .sub-info > p:first-child {
-    margin-left: 0; }
 
 .stc-active {
   transform: translateX(0); }
 
+.explainer {
+  padding: 10px 0;
+  background: #051a27;
+  color: #fefffe;
+  font-size: 1em; }
+  .explainer > p:first-child {
+    padding-left: 10px; }
+  .explainer > p:last-child {
+    padding-right: 10px; }
+
+.title-explainer,
 .session-title {
+  flex: 75%;
+  margin: 0 5px 0 0;
   font-weight: 400; }
 
+.time-explainer,
+.location-explainer,
 .session-time,
-.track,
 .location {
-  padding: 5px 7px 5px 0;
-  font-size: .75em; }
+  flex: 20%;
+  font-size: smaller;
+  text-align: right; }
 
-.session-time:before, .location::before {
-  font-size: 1em;
+.explainer > p {
+  margin: 0;
+  font-size: smaller; }
+
+.topic-explainer,
+.track {
+  flex: 5%;
+  text-align: center; }
+
+.time-explainer,
+.session-time {
   margin-right: 5px; }
 
-.session-time:before {
-  content: "🕚"; }
+.biology:before, .aspects-of-scientific-practice-organization:before, .tools-for-historians-of-science:before, .physical-sciences:before, .thematic-approaches-to-the-study-of-science:before {
+  text-align: center; }
 
-.location::before {
-  content: "📍"; }
+.biology:before {
+  content: "🔬"; }
+
+.aspects-of-scientific-practice-organization:before {
+  content: "⚖️"; }
+
+.tools-for-historians-of-science:before {
+  content: "🔧"; }
+
+.physical-sciences:before {
+  content: "🔭"; }
+
+.thematic-approaches-to-the-study-of-science:before {
+  content: "🗄️"; }

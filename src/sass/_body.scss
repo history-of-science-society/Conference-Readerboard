@@ -1,87 +1,113 @@
 .session-container {
-    margin-top: 50px;
     padding: 0 4vw;
 
-    font-size: 1em;
+    // font-size: 1.5em;
     // height: 500px
 
     >h2 {
-        // padding-bottom: .25em;
-        // border-bottom: 2px solid $light-blue;
-        font-size: 1.8em;
+        margin: .5em 0 0;
+        padding: .5em;
+
+        background: $dark-blue;
+        color: $white;
+        font-size: 1.2em;
+
     }
 
 }
 
 .session-title-container {
-    // align-items: center;
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-    padding-bottom: .5em;
+    margin-bottom: .5;
 
-    border-bottom: 2px solid $light-blue;
-    font-size: 1.7em;
-    font-weight: 100;
+    font-size: 1.2em;
+    font-weight: 400;
     transform: translateX(-100%);
     transition: transform .2s;
-
-    
-
-    >p {
-        margin: 0;
-    }
-
-
 }
 
-.sub-info {
-    display: flex;
-    flex: 1;
-    
-    align-items: center;
-
-
-
-
-    >p {
-        margin: 5px 0 0 50px;
-    }
-
-    >p:first-child {
-        margin-left: 0;
-    }
-}
 
 .stc-active {
     transform: translateX(0);
 
 }
 
-.session-title {
-    // flex: 1;
-    font-weight: 400;
-
-}
-
-.session-time,
-.track,
-.location {
-    padding: 5px 7px 5px 0;
-    font-size: .75em;
-}
-
-%subinfo-shared {
+.explainer {
+    padding: 10px 0;
+    background: darken($dark-blue, 10%);
+    color: $white;
     font-size: 1em;
+
+    >p:first-child {
+        padding-left: 10px;
+    }
+
+    >p:last-child {
+        padding-right: 10px;
+    }
+}
+
+.title-explainer,
+.session-title {
+    flex: 75%;
+    margin: 0 5px 0 0;
+
+    font-weight: 400;
+}
+
+
+
+.time-explainer,
+.location-explainer,
+.session-time,
+.location {
+    flex: 20%;
+    font-size: smaller;
+    text-align: right;
+}
+
+.explainer>p {
+    margin: 0;
+    font-size: smaller;
+}
+
+.topic-explainer,
+.track {
+    flex: 5%;
+    text-align: center;
+}
+
+.time-explainer,
+.session-time {
     margin-right: 5px;
 }
 
-.session-time:before {
-    content: "🕚";
-    @extend %subinfo-shared;
+// Define topic classes
+%text-center {
+    text-align: center;
+}
+.biology:before {
+    content: "🔬";
+    @extend %text-center;
 }
 
-.location::before {
-    content: "📍";
-    @extend %subinfo-shared;
+.aspects-of-scientific-practice-organization:before {
+    content: "⚖️";
+    @extend %text-center;
+}
+
+.tools-for-historians-of-science:before {
+    content: "🔧";
+    @extend %text-center;
+}
+
+.physical-sciences:before {
+    content: "🔭";
+    @extend %text-center;
+}
+
+.thematic-approaches-to-the-study-of-science:before {
+    content: "🗄️";
+    @extend %text-center;
 }

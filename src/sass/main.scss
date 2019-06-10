@@ -19,7 +19,7 @@ html {
     background: $black;
     color: $white;
     font-family: $sans;
-    font-size: 1em;
+    font-size: calc(1em + .25vw);
 }
 
 

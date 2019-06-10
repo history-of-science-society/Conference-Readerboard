@@ -6,7 +6,19 @@ const tracks = document.querySelectorAll('.track');
 const locations = document.querySelectorAll('.location');
 const sessTime = document.querySelectorAll('.session-time');
 
-
+// Define emojis for tracks
+const tools = "🔧";
+const theory = "💡";
+const theme = "🗄️";
+const aspect = "⚖️";
+const bio = "🧫"
+const chem = "⚗️";
+// const earth = 
+// const math =
+// const med =
+// const physics =
+// const social =
+// const tech =
 // For months
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -19,16 +31,31 @@ fetch('../dist/csv/convertcsv.json')
     .then((responseJSON) => {
 
         program.push(...responseJSON);
+
+        // Unique filter -> 
+        function genTopics(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+        const trackList = [];
+        
+        for (e in program) {
+            trackList.push(program[e]['Session Track'])
+        }
+
+        let uniqueTracks = trackList.filter(genTopics).map(x => x.toLowerCase().replace(/\s|\//g,"-"));
+        
+        console.table(uniqueTracks.toString());
+
+
         sessions.forEach(function (e, i) {
 
-
-            e.innerHTML = `${i + 1}. ${program[i]['Session Name']}`;
+            e.innerHTML = `${program[i]['Session Name']}`;
         })
 
         tracks.forEach(function (e, i) {
-            let track = `${program[i]['Session Track']}`;
+            let track = ((program[i]['Session Track'] != "") ? `${program[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
 
-            e.innerHTML = track;
+            e.classList.add(track);
         })
 
         locations.forEach(function (e, i) {
@@ -43,9 +70,9 @@ fetch('../dist/csv/convertcsv.json')
             e.innerHTML = sessStart;
         })
 
-    }).then
+    })
 
-console.log(program);
+
 
 
 
@@ -71,7 +98,7 @@ function setTime() {
     let now = new Date();
     let date = addZero(now.getDate());
     let month = spellMonth(now.getMonth());
-    let hour = addZero(now.getHours()); 
+    let hour = addZero(now.getHours());
     let min = addZero(now.getMinutes());
 
     timeDiv.innerHTML = `🕥&nbsp;${hour}:${min}`;
@@ -122,38 +149,38 @@ function icon(weatherID) {
 }
 
 // Weather 
-const weatherURL = "https://api.openweathermap.org/data/2.5/weather?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
+// const weatherURL = "https://api.openweathermap.org/data/2.5/weather?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
 
-fetch(weatherURL)
-    .then((response) => response.json())
-    .then((responseJSON) => {
+// fetch(weatherURL)
+//     .then((response) => response.json())
+//     .then((responseJSON) => {
 
-        const weather = document.querySelector('.weather > p');
-        const tempF = Math.trunc(responseJSON.main.temp);
-        const min = Math.trunc(responseJSON.main.temp_min);
-        const max = Math.trunc(responseJSON.main.temp_max);
-        const weatherDesc = responseJSON.weather[0].description;
-        // let id = (responseJSON.weather[0].id == 800) ? "CLEAR" : responseJSON.weather[0].id.toString();
-        const id = (responseJSON.weather[0].id == 800) ? "CLEAR" : responseJSON.weather[0].id.toString();
-
-
-        function celsius(x) {
-            return Math.trunc((x - 32) * 5 / 9);
-        }
+//         const weather = document.querySelector('.weather > p');
+//         const tempF = Math.trunc(responseJSON.main.temp);
+//         const min = Math.trunc(responseJSON.main.temp_min);
+//         const max = Math.trunc(responseJSON.main.temp_max);
+//         const weatherDesc = responseJSON.weather[0].description;
+//         // let id = (responseJSON.weather[0].id == 800) ? "CLEAR" : responseJSON.weather[0].id.toString();
+//         const id = (responseJSON.weather[0].id == 800) ? "CLEAR" : responseJSON.weather[0].id.toString();
 
 
-
-        let emoji = icon(weatherDesc);
-        // console.log(emoji);
-
-
-        weather.innerHTML = `${emoji} ${tempF}&deg; F (${celsius(tempF)}&deg; C)
-        `;
-
-        // Low: ${min}&deg; F (${celsius(min)}&deg; C) F / HIGH: ${max}&deg; F (${celsius(max)}&deg; C) `;
+//         function celsius(x) {
+//             return Math.trunc((x - 32) * 5 / 9);
+//         }
 
 
-    })
+
+//         let emoji = icon(weatherDesc);
+//         // console.log(emoji);
+
+
+//         weather.innerHTML = `${emoji} ${tempF}&deg; F (${celsius(tempF)}&deg; C)
+//         `;
+
+//         // Low: ${min}&deg; F (${celsius(min)}&deg; C) F / HIGH: ${max}&deg; F (${celsius(max)}&deg; C) `;
+
+
+//     })
 
 // Forecast
 // const forecast =
