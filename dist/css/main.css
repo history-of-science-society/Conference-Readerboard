@@ -56,7 +56,8 @@ html {
   height: 3.5em;
   justify-content: center;
   padding: 1em 4vw;
-  font-size: 1.5em; }
+  font-size: 1.5em;
+  transition: all 1s; }
 
 .date,
 .time,
@@ -120,33 +121,55 @@ html {
     color: #fefffe;
     font-size: 1.2em; }
 
-.session-title-container {
+.session-title-container, .explainer {
   align-items: center;
   display: flex;
-  margin-bottom: .5;
+  padding: 0 10px;
+  color: #020f16;
   font-size: 1.2em;
-  font-weight: 400;
-  transform: translateX(-100%);
-  transition: transform .2s; }
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+
+.session-1 {
+  background: #bfd7ea; }
+
+.session-2 {
+  background: #afcde5; }
+
+.session-3 {
+  background: #8fb9da; }
+
+.session-4 {
+  background: #6fa5d0; }
+
+.session-5 {
+  background: #4f91c5; }
+
+.session-6 {
+  background: #3a7cb0; }
 
 .stc-active {
+  opacity: 1;
   transform: translateX(0); }
 
 .explainer {
-  padding: 10px 0;
-  background: #051a27;
+  padding: 10px 10px;
+  background: #061d2a;
   color: #fefffe;
-  font-size: 1em; }
-  .explainer > p:first-child {
-    padding-left: 10px; }
-  .explainer > p:last-child {
-    padding-right: 10px; }
+  font-size: 1em;
+  opacity: 1;
+  transform: none; }
 
 .title-explainer,
 .session-title {
   flex: 75%;
   margin: 0 5px 0 0;
   font-weight: 400; }
+
+.session-title {
+  font-weight: 700; }
 
 .time-explainer,
 .location-explainer,
@@ -162,10 +185,9 @@ html {
 
 .topic-explainer,
 .track {
-  flex: 5%;
-  text-align: center; }
+  flex: 5%; }
 
-.time-explainer,
+.explainer > .time-explainer,
 .session-time {
   margin-right: 5px; }
 

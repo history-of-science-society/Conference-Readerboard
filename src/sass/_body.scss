@@ -19,33 +19,59 @@
 .session-title-container {
     align-items: center;
     display: flex;
-    margin-bottom: .5;
+    padding: 0 10px;
 
+    color: $black;
     font-size: 1.2em;
-    font-weight: 400;
-    transform: translateX(-100%);
-    transition: transform .2s;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.session-1 {
+    background: $light-blue;
+}
+
+.session-2 {
+    background: scale-color($light-blue, $lightness: -5%);
+}
+
+.session-3 {
+    background: scale-color($light-blue, $lightness: -15%);
+}
+
+.session-4 {
+    background: scale-color($light-blue, $lightness: -25%);
+}
+
+.session-5 {
+    background: scale-color($light-blue, $lightness: -35%);
+}
+
+.session-6 {
+    background: scale-color($light-blue, $lightness: -45%);
 }
 
 
+
 .stc-active {
+    opacity: 1;
     transform: translateX(0);
 
 }
 
 .explainer {
-    padding: 10px 0;
-    background: darken($dark-blue, 10%);
+    @extend .session-title-container;
+    padding: 10px 10px;
+
+    background: scale-color($dark-blue, $lightness: -50%);
     color: $white;
     font-size: 1em;
+    opacity: 1;
+    transform: none;
 
-    >p:first-child {
-        padding-left: 10px;
-    }
 
-    >p:last-child {
-        padding-right: 10px;
-    }
 }
 
 .title-explainer,
@@ -56,7 +82,9 @@
     font-weight: 400;
 }
 
-
+.session-title {
+    font-weight: 700;
+}
 
 .time-explainer,
 .location-explainer,
@@ -67,6 +95,8 @@
     text-align: right;
 }
 
+
+
 .explainer>p {
     margin: 0;
     font-size: smaller;
@@ -75,10 +105,10 @@
 .topic-explainer,
 .track {
     flex: 5%;
-    text-align: center;
+
 }
 
-.time-explainer,
+.explainer>.time-explainer,
 .session-time {
     margin-right: 5px;
 }
@@ -87,6 +117,7 @@
 %text-center {
     text-align: center;
 }
+
 .biology:before {
     content: "🔬";
     @extend %text-center;
