@@ -77,11 +77,11 @@ fetch('../dist/csv/convertcsv.json')
             result[p] = program.slice(0 + (p * 6), 6 + (p * 6));
         }
 
-        
-        
 
 
-        
+
+
+
         return result[0];
     }).then((result) => {
         // Write content to DOM
@@ -171,7 +171,7 @@ function setTime() {
     let hourIcon = "";
     let min = addZero(now.getMinutes());
 
-    
+
 
     switch (hourToTwelve) {
         case 0:
@@ -291,12 +291,33 @@ fetch(weatherURL)
     })
 
 // Forecast
-// const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
+const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
 
-// fetch(forecastURL)
-//     .then((response) => response.json())
-//     .then((forecastData) => {
-//         const dt = moment(forecastData.list[0].dt);
-//         console.log(moment.unix(dt).format("DD MMMM YYYY"));
+fetch(forecastURL)
+    .then((response) => response.json())
+    .then((forecastData) => {
+        console.log(forecastData);
 
-//     })
+        const tomForecastDom = document.querySelector('.tom-forecast');
+        let tomTempArr = [];
+        let tomWeatherArr = [];
+
+        for (i in forecastData.list) {
+            if (moment.unix(forecastData.list[i].dt).format('dd') ===
+                moment().add(1, 'd').format('dd')) {
+                
+                tomTempArr.push(forecastData.list[i].main.temp);
+                tomWeatherArr.push(forecastData.list[i].weather[0].id)
+
+            }
+        }
+
+        let tomTemp = Math.trunc(tomTempArr.reduce((a,b) => a + b, 0) / tomTempArr.length);
+
+        let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a,b) => a + b, 0) / tomTempArr.length);
+        
+        let emoji = icon(tomWeatherID.toString());
+
+        tomForecastDom.innerHTML = `${emoji} ${tomTemp}&deg F (${celsius(tomTemp)}&deg; C)`
+
+    })
