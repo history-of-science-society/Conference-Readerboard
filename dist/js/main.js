@@ -312,12 +312,14 @@ fetch(forecastURL)
             }
         }
 
-        let tomTemp = Math.trunc(tomTempArr.reduce((a,b) => a + b, 0) / tomTempArr.length);
+        let tomTemp = Math.trunc(tomTempArr.reduce((a,b) => a + b) / tomTempArr.length);
 
-        let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a,b) => a + b, 0) / tomTempArr.length);
+        let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a,b) => a + b) / tomWeatherArr.length);
         
         let emoji = icon(tomWeatherID.toString());
 
         tomForecastDom.innerHTML = `${emoji} ${tomTemp}&deg F (${celsius(tomTemp)}&deg; C)`
 
     })
+
+    console.log([1,1,2].reduce( (a,b) => a + b ))

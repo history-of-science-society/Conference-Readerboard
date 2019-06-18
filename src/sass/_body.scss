@@ -1,5 +1,13 @@
+.container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: calc(100vh - 3em);
+}
+
 .session-container {
     padding: 0 4vw;
+    width: 100%;
 
     // font-size: 1.5em;
     // height: 500px

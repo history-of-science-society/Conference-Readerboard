@@ -1,0 +1,46 @@
+
+.info-container {
+    display: flex;
+    bottom: 0;
+    flex: 1;
+    justify-content: space-between;
+   
+    padding: 0 15px;
+    
+    background: scale-color($dark-blue, $lightness: -50%);
+    font-size: .8em;
+}
+
+.info {
+    
+    align-items: stretch;
+    display: flex;
+     
+    margin: 0;
+
+    text-align: center;
+    text-transform: uppercase;
+}
+.info-name {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+   
+    // padding: .5em 0;
+    
+   
+}
+.info-status  {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.open::before {
+    content: "✔️";
+    // margin-left: 15px;
+   
+} 
+
