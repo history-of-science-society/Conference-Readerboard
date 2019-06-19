@@ -296,7 +296,7 @@ const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912
 fetch(forecastURL)
     .then((response) => response.json())
     .then((forecastData) => {
-        console.log(forecastData);
+       
 
         const tomForecastDom = document.querySelector('.tom-forecast');
         let tomTempArr = [];
@@ -304,7 +304,7 @@ fetch(forecastURL)
 
         for (i in forecastData.list) {
             if (moment.unix(forecastData.list[i].dt).format('dd') ===
-                moment().add(1, 'd').format('dd')) {
+               moment().add(1, 'd').format('dd')) {
                 
                 tomTempArr.push(forecastData.list[i].main.temp);
                 tomWeatherArr.push(forecastData.list[i].weather[0].id)
@@ -322,4 +322,6 @@ fetch(forecastURL)
 
     })
 
-    console.log([1,1,2].reduce( (a,b) => a + b ))
+   
+
+  
