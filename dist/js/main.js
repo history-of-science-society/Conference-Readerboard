@@ -13,7 +13,7 @@ const theme = "🗄️";
 const aspect = "⚖️";
 const bio = "🧫"
 const chem = "⚗️";
-// const earth = 
+// const earth =
 // const math =
 // const med =
 // const physics =
@@ -32,7 +32,7 @@ fetch('../dist/csv/convertcsv.json')
 
         program.push(...responseJSON);
 
-        // Sort by start time 
+        // Sort by start time
         // Will have to add sort by date first
 
         function compareTime(a, b) {
@@ -51,7 +51,7 @@ fetch('../dist/csv/convertcsv.json')
 
         program.sort(compareTime);
 
-        // Unique filter -> 
+        // Unique filter ->
         function genTopics(value, index, self) {
             return self.indexOf(value) === index;
         }
@@ -164,6 +164,7 @@ function setTime() {
     const dateDiv = document.querySelector('.date > p');
 
     let now = new Date();
+
     let date = addZero(now.getDate());
     let month = spellMonth(now.getMonth());
     let hour = addZero(now.getHours());
@@ -268,7 +269,7 @@ function celsius(x) {
     return Math.trunc((x - 32) * 5 / 9);
 }
 
-// Weather 
+// Weather
 const weatherURL = "https://api.openweathermap.org/data/2.5/weather?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
 
 fetch(weatherURL)
@@ -296,7 +297,7 @@ const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912
 fetch(forecastURL)
     .then((response) => response.json())
     .then((forecastData) => {
-       
+
 
         const tomForecastDom = document.querySelector('.tom-forecast');
         let tomTempArr = [];
@@ -305,7 +306,7 @@ fetch(forecastURL)
         for (i in forecastData.list) {
             if (moment.unix(forecastData.list[i].dt).format('dd') ===
                moment().add(1, 'd').format('dd')) {
-                
+
                 tomTempArr.push(forecastData.list[i].main.temp);
                 tomWeatherArr.push(forecastData.list[i].weather[0].id)
 
@@ -315,13 +316,15 @@ fetch(forecastURL)
         let tomTemp = Math.trunc(tomTempArr.reduce((a,b) => a + b) / tomTempArr.length);
 
         let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a,b) => a + b) / tomWeatherArr.length);
-        
+
         let emoji = icon(tomWeatherID.toString());
 
         tomForecastDom.innerHTML = `${emoji} ${tomTemp}&deg F (${celsius(tomTemp)}&deg; C)`
 
     })
 
-   
 
-  
+
+    let utrechtNow = moment().tz("Europe/Amsterdam");
+
+    console.log(utrechtNow.format("HH:mm"))

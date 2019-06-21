@@ -179,12 +179,6 @@ html {
 .thematic-approaches-to-the-study-of-science:before {
   content: "🗄️"; }
 
-.container {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  min-height: calc(100vh - 3em); }
-
 .info-container {
   display: flex;
   bottom: 0;
@@ -213,5 +207,8 @@ html {
   justify-content: center;
   margin-left: 15px; }
 
-.open::before {
+.open:before {
   content: "✔️"; }
+
+.closed:before {
+  content: "❌"; }
