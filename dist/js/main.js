@@ -74,6 +74,7 @@ fetch('../dist/csv/convertcsv.json')
         program.sort(compareDate,compareTime);
 
         console.table(program);
+
         // Unique filter ->
         function genTopics(value, index, self) {
             return self.indexOf(value) === index;
@@ -92,13 +93,27 @@ fetch('../dist/csv/convertcsv.json')
         // Parcel out program
         let result = [];
 
-        let loopsToRun = Math.ceil(program.length / 6);
-
-        for (let p = 0; p < loopsToRun; p++) {
-            result[p] = program.slice(0 + (p * 6), 6 + (p * 6));
+        // Filter out constant events
+        function removeEvents(v) {
+            if (['Book Exhibit & HSS Cafe','Registration','Quiet Space','Meeting Point','Nursing Mother\'s Room'].includes(v['Session Name'])) {
+                return;
+            } else {
+                return v;
+            };
         }
 
+        let eventsRemoved = program.filter(removeEvents);
+
+
+
+        let loopsToRun = Math.ceil(eventsRemoved.length / 6);
+
+        for (let p = 0; p < loopsToRun; p++) {
+            result[p] = eventsRemoved.slice(0 + (p * 6), 6 + (p * 6));
+        }
+        console.log(result[0]);
         return result[0];
+
     }).then((result) => {
         // Write content to DOM
         function writeToDom() {
@@ -123,8 +138,8 @@ fetch('../dist/csv/convertcsv.json')
             // Write start and end time to DOM
             sessTime.forEach(function (e, i) {
 
-                const sessStart = (program[i]['Start Time'].length < 8) ? "0" + program[i]['Start Time'].substring(0, 4) : program[i]['Start Time'].substring(0, 5);
-                const sessEnd = (program[i]['End Time'].length < 8) ? "0" + program[i]['End Time'].substring(0, 4) : program[i]['End Time'].substring(0, 5);
+                const sessStart = (result[i]['Start Time'].length < 8) ? "0" + result[i]['Start Time'].substring(0, 4) : result[i]['Start Time'].substring(0, 5);
+                const sessEnd = (result[i]['End Time'].length < 8) ? "0" + result[i]['End Time'].substring(0, 4) : result[i]['End Time'].substring(0, 5);
                 const sessTime = `${sessStart}&ndash;${sessEnd}`;
                 e.innerHTML = sessTime;
             })
