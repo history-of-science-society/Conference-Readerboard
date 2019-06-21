@@ -1,26 +1,31 @@
 // Set the variables
 
+// Time check
+let now = moment.tz('Europe/Amsterdam');
+
+// function timeSwitch() {
+
+//     (now = moment()) ? now = moment.tz('Europe/Amsterdam'): now = moment();
+//     setTimeout(timeSwitch, 500);
+
+// }
+
+// if (moment().isSame(moment.tz('Europe/Amsterdam'))) {
+//     now = moment();
+// } else {
+//     console.log('switcher');
+//     timeSwitch();
+// }
+
+
+
 //Get DOM
 const sessions = document.querySelectorAll('.session-title');
 const tracks = document.querySelectorAll('.track');
 const locations = document.querySelectorAll('.location');
 const sessTime = document.querySelectorAll('.session-time');
 
-// Define emojis for tracks
-const tools = "🔧";
-const theory = "💡";
-const theme = "🗄️";
-const aspect = "⚖️";
-const bio = "🧫"
-const chem = "⚗️";
-// const earth =
-// const math =
-// const med =
-// const physics =
-// const social =
-// const tech =
-// For months
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
 // Data
 let program = [];
@@ -32,10 +37,27 @@ fetch('../dist/csv/convertcsv.json')
 
         program.push(...responseJSON);
 
+
         // Sort by start time
         // Will have to add sort by date first
 
+        function compareDate(a, b) {
+            a = a.Date;
+            b = b.Date;
+
+            let comp = 0;
+
+            if (a > b) {
+                comp = 1;
+            } else if (a < b) {
+                comp = -1;
+            }
+
+            return comp;
+        }
+
         function compareTime(a, b) {
+
             const timeA = (a['Start Time'].length < 8) ? "0" + a['Start Time'] : a['Start Time'];
 
             const timeB = (b['Start Time'].length < 8) ? "0" + b['Start Time'] : b['Start Time'];
@@ -49,8 +71,9 @@ fetch('../dist/csv/convertcsv.json')
             return comparison;
         }
 
-        program.sort(compareTime);
+        program.sort(compareDate,compareTime);
 
+        console.table(program);
         // Unique filter ->
         function genTopics(value, index, self) {
             return self.indexOf(value) === index;
@@ -64,11 +87,9 @@ fetch('../dist/csv/convertcsv.json')
         let uniqueTracks = trackList.filter(genTopics).map(x => x.toLowerCase().replace(/\s|\//g, "-"));
 
         // Print unique strings to console for copying to stylesheet
-        console.table(uniqueTracks.toString());
+        console.table(uniqueTracks);
 
         // Parcel out program
-
-
         let result = [];
 
         let loopsToRun = Math.ceil(program.length / 6);
@@ -77,28 +98,19 @@ fetch('../dist/csv/convertcsv.json')
             result[p] = program.slice(0 + (p * 6), 6 + (p * 6));
         }
 
-
-
-
-
-
         return result[0];
     }).then((result) => {
         // Write content to DOM
         function writeToDom() {
 
-
-
             // Write session title to DOM
             sessions.forEach(function (e, i) {
-
                 e.innerHTML = `${result[i]['Session Name']}`;
             });
 
             // Write topics to DOM
             tracks.forEach(function (e, i) {
                 let track = ((result[i]['Session Track'] != "") ? `${result[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
-
                 e.classList.add(track);
             })
 
@@ -111,37 +123,14 @@ fetch('../dist/csv/convertcsv.json')
             // Write start and end time to DOM
             sessTime.forEach(function (e, i) {
 
-
                 const sessStart = (program[i]['Start Time'].length < 8) ? "0" + program[i]['Start Time'].substring(0, 4) : program[i]['Start Time'].substring(0, 5);
-
                 const sessEnd = (program[i]['End Time'].length < 8) ? "0" + program[i]['End Time'].substring(0, 4) : program[i]['End Time'].substring(0, 5);
-
                 const sessTime = `${sessStart}&ndash;${sessEnd}`;
-
                 e.innerHTML = sessTime;
             })
         }
-
-
-
         writeToDom();
     })
-
-
-
-
-// Adds leading zero to date and time
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-// Spell out the month
-function spellMonth(i) {
-    return months[i];
-}
 
 // Set time in the DOM
 
@@ -163,18 +152,12 @@ function setTime() {
     const timeDiv = document.querySelector('.time > p');
     const dateDiv = document.querySelector('.date > p');
 
-    let now = new Date();
+    let date = now.format('DD MMM YYYY');
+    let time = now.format('HH:mm');
+    let hourIcon;
+    let hour = parseInt(now.format('hh'));
 
-    let date = addZero(now.getDate());
-    let month = spellMonth(now.getMonth());
-    let hour = addZero(now.getHours());
-    let hourToTwelve = (hour < 12) ? hour : hour - 12;
-    let hourIcon = "";
-    let min = addZero(now.getMinutes());
-
-
-
-    switch (hourToTwelve) {
+    switch (hour) {
         case 0:
             hourIcon = twelveClck;
             break;
@@ -215,12 +198,11 @@ function setTime() {
             hourIcon = twelveClck;
     }
 
-
-    timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
-    dateDiv.innerHTML = `📅&nbsp;${date} ${month} ${now.getFullYear()}`;
+    // timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
+    timeDiv.innerHTML = `${hourIcon}&nbsp;${time}`;
+    dateDiv.innerHTML = `📅&nbsp;${date}`;
 
     let interval = setTimeout(setTime, 500);
-
 }
 
 setTime();
@@ -292,39 +274,53 @@ fetch(weatherURL)
     })
 
 // Forecast
-const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
 
-fetch(forecastURL)
-    .then((response) => response.json())
-    .then((forecastData) => {
+function getForecast() {
+    const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=2745912&units=imperial&appid=94e8ffdaf0cec6782fa67b86afe1a450";
+
+    fetch(forecastURL)
+        .then((response) => response.json())
+        .then((forecastData) => {
 
 
-        const tomForecastDom = document.querySelector('.tom-forecast');
-        let tomTempArr = [];
-        let tomWeatherArr = [];
 
-        for (i in forecastData.list) {
-            if (moment.unix(forecastData.list[i].dt).format('dd') ===
-               moment().add(1, 'd').format('dd')) {
+            const tomForecastDom = document.querySelector('.tom-forecast');
+            let tomTempArr = [];
+            let tomWeatherArr = [];
 
-                tomTempArr.push(forecastData.list[i].main.temp);
-                tomWeatherArr.push(forecastData.list[i].weather[0].id)
-
+            for (i in forecastData.list) {
+                if (moment.unix(forecastData.list[i].dt).format('dd') ===
+                    moment().add(1, 'd').format('dd')) {
+                    tomTempArr.push(forecastData.list[i].main.temp);
+                    tomWeatherArr.push(forecastData.list[i].weather[0].id)
+                }
             }
-        }
 
-        let tomTemp = Math.trunc(tomTempArr.reduce((a,b) => a + b) / tomTempArr.length);
+            let tomTemp = Math.trunc(tomTempArr.reduce((a, b) => a + b) / tomTempArr.length);
+            let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a, b) => a + b) / tomWeatherArr.length);
+            let emoji = icon(tomWeatherID.toString());
+            tomForecastDom.innerHTML = `${emoji} ${tomTemp}&deg F (${celsius(tomTemp)}&deg; C)`
+        })
 
-        let tomWeatherID = Math.trunc(tomWeatherArr.reduce((a,b) => a + b) / tomWeatherArr.length);
+    // Set timeout to return forecast every hour
+    setTimeout(getForecast, 3600000);
+    console.log('Forecast got')
+}
 
-        let emoji = icon(tomWeatherID.toString());
+// Get forecast on page load
+getForecast();
 
-        tomForecastDom.innerHTML = `${emoji} ${tomTemp}&deg F (${celsius(tomTemp)}&deg; C)`
+// Resize element
+const header = document.querySelector('.header-container').offsetHeight;
+const container = document.querySelector('.container');
 
-    })
+//Set initial size of container
+container.style.minHeight = `${window.innerHeight - header - 50}px`;
 
+// Resize container depending on window size
+function resizeWindow() {
+    container.style.minHeight = `${window.innerHeight - header - 50}px`;
 
+}
 
-    let utrechtNow = moment().tz("Europe/Amsterdam");
-
-    console.log(utrechtNow.format("HH:mm"))
+window.onresize = resizeWindow;

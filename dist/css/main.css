@@ -18,11 +18,13 @@ html {
 .header-container {
   align-items: center;
   display: flex;
-  height: 3em;
+  flex-wrap: wrap;
   padding: .5em 4vw;
   justify-content: space-between;
   background: #ffd557;
   color: #020f16; }
+  .header-container > * {
+    margin: 5px 0; }
 
 .brand-container {
   align-items: center;
@@ -54,7 +56,7 @@ html {
   align-items: center;
   background: #0b3954;
   display: flex;
-  height: 3.5em;
+  height: 90px;
   justify-content: center;
   padding: 1em 0;
   font-size: 1em;
@@ -66,7 +68,7 @@ html {
 .date,
 .time,
 .weather {
-  margin: 0 1em;
+  margin-right: 10px;
   font-size: 1.2em;
   font-weight: 300; }
   .date > p,
@@ -77,9 +79,9 @@ html {
 
 .container {
   align-items: center;
-  justify-content: center;
   display: flex;
-  min-height: calc(100vh - 3em); }
+  justify-content: center;
+  margin: 25px; }
 
 .session-container {
   padding: 0 4vw;
@@ -94,7 +96,8 @@ html {
 .session-title-container, .explainer {
   align-items: center;
   display: flex;
-  padding: 0 10px;
+  height: 90px;
+  padding: 5px 10px;
   color: #020f16;
   font-size: 1.2em;
   font-weight: 600;
@@ -125,6 +128,7 @@ html {
   transform: translateX(0); }
 
 .explainer {
+  height: 50px;
   padding: 10px 10px;
   background: #061d2a;
   color: #fefffe;
@@ -135,8 +139,7 @@ html {
 .title-explainer,
 .session-title {
   flex: 75%;
-  margin: 0 5px 0 0;
-  font-weight: 400; }
+  margin: 0 5px 0 0; }
 
 .session-title {
   font-weight: 700; }
@@ -161,28 +164,46 @@ html {
 .session-time {
   margin-right: 5px; }
 
-.biology:before, .aspects-of-scientific-practice-organization:before, .tools-for-historians-of-science:before, .physical-sciences:before, .thematic-approaches-to-the-study-of-science:before {
+.aspects-of-scientific-practice-organization:before, .biology:before, .chemistry:before, .earth-and-environmental-sciences, .mathematics, .medicine-and-health:before, .physical-sciences:before, .social-sciences:before, .thematic-approaches-to-the-study-of-science:before, .theoretical-approaches-to-the-study-of-science, .tools-for-historians-of-science:before {
   text-align: center; }
-
-.biology:before {
-  content: "🔬"; }
 
 .aspects-of-scientific-practice-organization:before {
   content: "⚖️"; }
 
-.tools-for-historians-of-science:before {
-  content: "🔧"; }
+.biology:before {
+  content: "🔬"; }
+
+.chemistry:before {
+  content: "⚗️"; }
+
+.earth-and-environmental-sciences {
+  content: "🌍"; }
+
+.mathematics {
+  content: "➗"; }
+
+.medicine-and-health:before {
+  content: "💉"; }
 
 .physical-sciences:before {
   content: "🔭"; }
 
+.social-sciences:before {
+  content: "🏙️"; }
+
 .thematic-approaches-to-the-study-of-science:before {
   content: "🗄️"; }
 
+.theoretical-approaches-to-the-study-of-science {
+  content: "💡"; }
+
+.tools-for-historians-of-science:before {
+  content: "🔧"; }
+
 .info-container {
   display: flex;
-  bottom: 0;
   flex: 1;
+  height: 50px;
   justify-content: space-between;
   padding: 0 15px;
   background: #061d2a;
@@ -205,7 +226,7 @@ html {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-left: 15px; }
+  margin-left: 7px; }
 
 .open:before {
   content: "✔️"; }

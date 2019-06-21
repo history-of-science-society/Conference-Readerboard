@@ -3,19 +3,23 @@
 .header-container {
     align-items: center;
     display: flex;
-    height: 3em;
+    flex-wrap: wrap;
     padding: .5em 4vw;
     justify-content: space-between;
-   
+
+
 
     background: $yellow;
     color: $black;
+    >* {
+        margin: 5px 0;
+    }
 }
 
 .brand-container {
     align-items: center;
     display: flex;
-    
+
     color: $black;
     text-decoration: none;
     >img {
@@ -26,7 +30,7 @@
 .brand {
     margin: 0;
     padding: 0;
-    
+
     font-size: 2em;
     font-weight: 700;
     font-family: 'Adobe Garamond Pro', Garamond, Georgia, serif;
@@ -48,7 +52,7 @@
     align-items: center;
     background: $dark-blue;
     display: flex;
-    height: 3.5em;
+    height: 90px;
     justify-content: center;
     padding: 1em 0;
 
@@ -63,13 +67,15 @@
 .date,
 .time,
 .weather {
-    margin: 0 1em;
-    
+
+    margin-right: 10px;
     font-size: 1.2em;
     font-weight: 300;
-    // transition: 1s;
+
     > p {
         margin: 0;
         text-transform: uppercase;
     }
 }
+
+

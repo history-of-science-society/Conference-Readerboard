@@ -1,8 +1,8 @@
 .container {
     align-items: center;
-    justify-content: center;
     display: flex;
-    min-height: calc(100vh - 3em);
+    justify-content: center;
+    margin: 25px;
 }
 
 .session-container {
@@ -27,7 +27,8 @@
 .session-title-container {
     align-items: center;
     display: flex;
-    padding: 0 10px;
+    height: 90px;
+    padding: 5px 10px;
 
     color: $black;
     font-size: 1.2em;
@@ -71,6 +72,7 @@
 
 .explainer {
     @extend .session-title-container;
+    height: 50px;
     padding: 10px 10px;
 
     background: scale-color($dark-blue, $lightness: -50%);
@@ -86,8 +88,6 @@
 .session-title {
     flex: 75%;
     margin: 0 5px 0 0;
-
-    font-weight: 400;
 }
 
 .session-title {
@@ -126,18 +126,33 @@
     text-align: center;
 }
 
-.biology:before {
-    content: "🔬";
-    @extend %text-center;
-}
-
 .aspects-of-scientific-practice-organization:before {
     content: "⚖️";
     @extend %text-center;
 }
 
-.tools-for-historians-of-science:before {
-    content: "🔧";
+.biology:before {
+    content: "🔬";
+    @extend %text-center;
+}
+
+.chemistry:before {
+    content: "⚗️";
+    @extend %text-center;
+}
+
+.earth-and-environmental-sciences {
+    content: "🌍";
+    @extend %text-center;
+}
+
+.mathematics {
+    content: "➗";
+    @extend %text-center;
+}
+
+.medicine-and-health:before {
+    content: "💉";
     @extend %text-center;
 }
 
@@ -146,7 +161,22 @@
     @extend %text-center;
 }
 
+.social-sciences:before {
+    content: "🏙️";
+    @extend %text-center;
+}
+
 .thematic-approaches-to-the-study-of-science:before {
     content: "🗄️";
+    @extend %text-center;
+}
+
+.theoretical-approaches-to-the-study-of-science {
+    content: "💡";
+    @extend %text-center;
+}
+
+.tools-for-historians-of-science:before {
+    content: "🔧";
     @extend %text-center;
 }
