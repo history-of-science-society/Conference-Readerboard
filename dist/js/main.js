@@ -107,37 +107,76 @@ fetch('../dist/csv/convertcsv.json')
 
     }).then((result) => {
 
-        let filteredResult = result.filter((el, idx) => {
-            if (moment(el['Start Time'], 'HH mm ss').isBefore(now) && moment(el['End Time'], 'HH mm ss').isAfter(now)) {
-                return el;
+        function filterProgram(sess) {
+
+            const earlierThanNow = moment(now).subtract(165, 'm');
+            const laterThanNow = moment(now).add(165, 'm');
+            const startTime = moment(sess['Start Time'], 'HH mm ss');
+            const endTime = moment(sess['End Time'], 'HH mm ss');
+            const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
+            const dateNow = moment('2019-07-24');
+
+            if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
+                return sess;
             }
-        })
+        }
+        //Filter results based on time and date
+        let filteredResult = result.filter( sess => filterProgram(sess));
+
+        let filterWhole = Math.floor(filteredResult.length / 6);
+        let filterRemainder = filteredResult.length % 6;
+        let pass = 0;
+        let slicedResult = [];
+
+        function sliceResult() {
+
+            if (pass > 14) {
+                pass = 0;
+            } else {
+                pass;
+            }
+            slicedResult = filteredResult.slice(pass, pass + 6);
+            console.log(slicedResult);
+            pass += 6;
+            return slicedResult;
+        }
+        sliceResult();
+        setInterval (() => {
+            sliceResult();
+            writeToDom();
+        }, 3000);
+        // ((el, idx) => {
+        //     if (moment(el['Start Time'], 'HH mm ss').isAfter(moment(now).subtract(165, 'm')) && moment(el['End Time'], 'HH mm ss').isBefore(moment(now).add(165, 'm')) && moment(el['Date'], 'YYYY-MM-DD').isSame(moment('2019-07-24'))) {
+        //         return el;
+        //     }
+        // })
+
 
         // Write content to DOM
         function writeToDom() {
 
             // Write session title to DOM
             sessions.forEach(function (e, i) {
-                e.innerHTML = `${filteredResult[i]['Session Name']}`;
+                e.innerHTML = `${slicedResult[i]['Session Name']}`;
             });
 
             // Write topics to DOM
             tracks.forEach(function (e, i) {
-                let track = ((filteredResult[i]['Session Track'] != "") ? `${filteredResult[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
+                let track = ((slicedResult[i]['Session Track'] != "") ? `${slicedResult[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
                 e.classList.add(track);
             })
 
             // Write venue to DOM
             locations.forEach(function (e, i) {
-                let location = filteredResult[i]['Venue'];
+                let location = slicedResult[i]['Venue'];
                 e.innerHTML = location;
             })
 
             // Write start and end time to DOM
             sessTime.forEach(function (e, i) {
 
-                const sessStart = (filteredResult[i]['Start Time'].length < 8) ? "0" + filteredResult[i]['Start Time'].substring(0, 4) : filteredResult[i]['Start Time'].substring(0, 5);
-                const sessEnd = (filteredResult[i]['End Time'].length < 8) ? "0" + filteredResult[i]['End Time'].substring(0, 4) : filteredResult[i]['End Time'].substring(0, 5);
+                const sessStart = (slicedResult[i]['Start Time'].length < 8) ? "0" + slicedResult[i]['Start Time'].substring(0, 4) : slicedResult[i]['Start Time'].substring(0, 5);
+                const sessEnd = (slicedResult[i]['End Time'].length < 8) ? "0" + slicedResult[i]['End Time'].substring(0, 4) : slicedResult[i]['End Time'].substring(0, 5);
                 const sessTime = `${sessStart}&ndash;${sessEnd}`;
                 e.innerHTML = sessTime;
             })
@@ -328,16 +367,19 @@ function getForecast() {
 getForecast();
 
 // Resize element
+//Need to alter for smaller viewports
 const header = document.querySelector('.header-container').offsetHeight;
 const container = document.querySelector('.container');
+const sessionContainer = document.querySelectorAll('.session-title-container');
 
-//Set initial size of container
+//Set initial size of container & items
 container.style.minHeight = `${window.innerHeight - header - 50}px`;
+sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
 
 // Resize container depending on window size
 function resizeWindow() {
     container.style.minHeight = `${window.innerHeight - header - 50}px`;
-
+    sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
 }
 
 window.onresize = resizeWindow;

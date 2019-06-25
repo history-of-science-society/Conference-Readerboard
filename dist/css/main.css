@@ -96,7 +96,7 @@ html {
 .session-title-container, .explainer {
   align-items: center;
   display: flex;
-  height: 90px;
+  height: auto;
   padding: 5px 10px;
   color: #020f16;
   font-size: 1.2em;
