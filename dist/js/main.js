@@ -1,7 +1,9 @@
 // Set the variables
 
 // Time check
-let now = moment.tz('Europe/Amsterdam');
+// let now = moment.tz('Europe/Amsterdam');
+let now = moment();
+
 
 // function timeSwitch() {
 
@@ -71,9 +73,9 @@ fetch('../dist/csv/convertcsv.json')
             return comparison;
         }
 
-        program.sort(compareDate,compareTime);
+        program.sort(compareDate, compareTime);
 
-        console.table(program);
+
 
         // Unique filter ->
         function genTopics(value, index, self) {
@@ -90,12 +92,9 @@ fetch('../dist/csv/convertcsv.json')
         // Print unique strings to console for copying to stylesheet
         console.table(uniqueTracks);
 
-        // Parcel out program
-        let result = [];
-
         // Filter out constant events
         function removeEvents(v) {
-            if (['Book Exhibit & HSS Cafe','Registration','Quiet Space','Meeting Point','Nursing Mother\'s Room'].includes(v['Session Name'])) {
+            if (['Book Exhibit & HSS Cafe', 'Registration', 'Quiet Space', 'Meeting Point', 'Nursing Mother\'s Room'].includes(v['Session Name'])) {
                 return;
             } else {
                 return v;
@@ -104,47 +103,50 @@ fetch('../dist/csv/convertcsv.json')
 
         let eventsRemoved = program.filter(removeEvents);
 
-
-
-        let loopsToRun = Math.ceil(eventsRemoved.length / 6);
-
-        for (let p = 0; p < loopsToRun; p++) {
-            result[p] = eventsRemoved.slice(0 + (p * 6), 6 + (p * 6));
-        }
-        console.log(result[0]);
-        return result[0];
+        return eventsRemoved;
 
     }).then((result) => {
+
+        let filteredResult = result.filter((el, idx) => {
+            if (moment(el['Start Time'], 'HH mm ss').isBefore(now) && moment(el['End Time'], 'HH mm ss').isAfter(now)) {
+                return el;
+            }
+        })
+
         // Write content to DOM
         function writeToDom() {
 
             // Write session title to DOM
             sessions.forEach(function (e, i) {
-                e.innerHTML = `${result[i]['Session Name']}`;
+                e.innerHTML = `${filteredResult[i]['Session Name']}`;
             });
 
             // Write topics to DOM
             tracks.forEach(function (e, i) {
-                let track = ((result[i]['Session Track'] != "") ? `${result[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
+                let track = ((filteredResult[i]['Session Track'] != "") ? `${filteredResult[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
                 e.classList.add(track);
             })
 
             // Write venue to DOM
             locations.forEach(function (e, i) {
-                let location = result[i]['Venue'];
+                let location = filteredResult[i]['Venue'];
                 e.innerHTML = location;
             })
 
             // Write start and end time to DOM
             sessTime.forEach(function (e, i) {
 
-                const sessStart = (result[i]['Start Time'].length < 8) ? "0" + result[i]['Start Time'].substring(0, 4) : result[i]['Start Time'].substring(0, 5);
-                const sessEnd = (result[i]['End Time'].length < 8) ? "0" + result[i]['End Time'].substring(0, 4) : result[i]['End Time'].substring(0, 5);
+                const sessStart = (filteredResult[i]['Start Time'].length < 8) ? "0" + filteredResult[i]['Start Time'].substring(0, 4) : filteredResult[i]['Start Time'].substring(0, 5);
+                const sessEnd = (filteredResult[i]['End Time'].length < 8) ? "0" + filteredResult[i]['End Time'].substring(0, 4) : filteredResult[i]['End Time'].substring(0, 5);
                 const sessTime = `${sessStart}&ndash;${sessEnd}`;
                 e.innerHTML = sessTime;
             })
         }
         writeToDom();
+
+
+
+
     })
 
 // Set time in the DOM

@@ -166,6 +166,11 @@
     @extend %text-center;
 }
 
+.technology:before {
+    content: "⚙️";
+    @extend %text-center;
+}
+
 .thematic-approaches-to-the-study-of-science:before {
     content: "🗄️";
     @extend %text-center;
