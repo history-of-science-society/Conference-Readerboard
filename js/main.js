@@ -33,7 +33,7 @@ const sessTime = document.querySelectorAll('.session-time');
 let program = [];
 
 // Get the program
-fetch('../dist/csv/convertcsv.json')
+fetch('./csv/convertcsv.json')
     .then((response) => response.json())
     .then((responseJSON) => {
 
@@ -105,7 +105,7 @@ fetch('../dist/csv/convertcsv.json')
         function filterProgram(sess) {
 
             const earlierThanNow = moment(now).subtract(180, 'm');
-            const laterThanNow = moment(now).add(180, 'm');
+            const laterThanNow = moment(now).add(30, 'm');
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
