@@ -141,12 +141,12 @@
     @extend %text-center;
 }
 
-.earth-and-environmental-sciences {
+.earth-and-environmental-sciences:before {
     content: "🌍";
     @extend %text-center;
 }
 
-.mathematics {
+.mathematics:before {
     content: "➗";
     @extend %text-center;
 }
@@ -176,7 +176,7 @@
     @extend %text-center;
 }
 
-.theoretical-approaches-to-the-study-of-science {
+.theoretical-approaches-to-the-study-of-science:before {
     content: "💡";
     @extend %text-center;
 }

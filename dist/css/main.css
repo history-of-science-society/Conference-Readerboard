@@ -164,7 +164,7 @@ html {
 .session-time {
   margin-right: 5px; }
 
-.aspects-of-scientific-practice-organization:before, .biology:before, .chemistry:before, .earth-and-environmental-sciences, .mathematics, .medicine-and-health:before, .physical-sciences:before, .social-sciences:before, .technology:before, .thematic-approaches-to-the-study-of-science:before, .theoretical-approaches-to-the-study-of-science, .tools-for-historians-of-science:before {
+.aspects-of-scientific-practice-organization:before, .biology:before, .chemistry:before, .earth-and-environmental-sciences:before, .mathematics:before, .medicine-and-health:before, .physical-sciences:before, .social-sciences:before, .technology:before, .thematic-approaches-to-the-study-of-science:before, .theoretical-approaches-to-the-study-of-science:before, .tools-for-historians-of-science:before {
   text-align: center; }
 
 .aspects-of-scientific-practice-organization:before {
@@ -176,10 +176,10 @@ html {
 .chemistry:before {
   content: "⚗️"; }
 
-.earth-and-environmental-sciences {
+.earth-and-environmental-sciences:before {
   content: "🌍"; }
 
-.mathematics {
+.mathematics:before {
   content: "➗"; }
 
 .medicine-and-health:before {
@@ -197,7 +197,7 @@ html {
 .thematic-approaches-to-the-study-of-science:before {
   content: "🗄️"; }
 
-.theoretical-approaches-to-the-study-of-science {
+.theoretical-approaches-to-the-study-of-science:before {
   content: "💡"; }
 
 .tools-for-historians-of-science:before {

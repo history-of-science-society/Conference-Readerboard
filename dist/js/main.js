@@ -43,38 +43,31 @@ fetch('../dist/csv/convertcsv.json')
         // Sort by start time
         // Will have to add sort by date first
 
-        function compareDate(a, b) {
-            a = a.Date;
-            b = b.Date;
-
-            let comp = 0;
-
-            if (a > b) {
-                comp = 1;
-            } else if (a < b) {
-                comp = -1;
+        function compareProgram(a, b) {
+            if (a.Date > b.Date) {
+                return 1;
+            } else if (a.Date < b.Date) {
+                return -1;
             }
 
-            return comp;
-        }
-
-        function compareTime(a, b) {
-
-            const timeA = (a['Start Time'].length < 8) ? "0" + a['Start Time'] : a['Start Time'];
-
-            const timeB = (b['Start Time'].length < 8) ? "0" + b['Start Time'] : b['Start Time'];
-
-            let comparison = 0;
-            if (timeA > timeB) {
-                comparison = 1;
-            } else if (timeA < timeB) {
-                comparison = -1;
+            if (a['Start Time'] > b['Start Time']) {
+                return 1;
+            } else if (a['Start Time'] < b['Start Time']) {
+                return -1;
             }
-            return comparison;
+            if (a['Session Name'] > b['Session Name']) {
+                return 1;
+            } else if (a['Session Name'] < b['Session Name']) {
+                return -1;
+            }
+
+            return 0;
         }
 
-        program.sort(compareDate, compareTime);
 
+
+        program.sort(compareProgram);
+        console.log(program);
 
 
         // Unique filter ->
@@ -91,6 +84,8 @@ fetch('../dist/csv/convertcsv.json')
 
         // Print unique strings to console for copying to stylesheet
         console.table(uniqueTracks);
+
+
 
         // Filter out constant events
         function removeEvents(v) {
@@ -109,8 +104,8 @@ fetch('../dist/csv/convertcsv.json')
 
         function filterProgram(sess) {
 
-            const earlierThanNow = moment(now).subtract(165, 'm');
-            const laterThanNow = moment(now).add(165, 'm');
+            const earlierThanNow = moment(now).subtract(180, 'm');
+            const laterThanNow = moment(now).add(180, 'm');
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
@@ -121,30 +116,42 @@ fetch('../dist/csv/convertcsv.json')
             }
         }
         //Filter results based on time and date
-        let filteredResult = result.filter( sess => filterProgram(sess));
+        let filteredResult = result.filter(sess => filterProgram(sess));
 
-        let filterWhole = Math.floor(filteredResult.length / 6);
-        let filterRemainder = filteredResult.length % 6;
+        let filteredLength = filteredResult.length;
+
         let pass = 0;
         let slicedResult = [];
 
         function sliceResult() {
 
-            if (pass > 14) {
-                pass = 0;
+            if (pass + 6 <= filteredLength) {
+
+                slicedResult = filteredResult.slice(pass, pass + 6);
+                pass += 6;
+
+                return slicedResult;
             } else {
-                pass;
+
+                let firstSlice = filteredResult.slice(pass, filteredLength);
+
+                let secondSlice = filteredResult.slice(0, 6 - (filteredLength - pass));
+
+                slicedResult = [...firstSlice, ...secondSlice];
+
+                pass = 6 - (filteredLength - pass);
+                return slicedResult;
             }
-            slicedResult = filteredResult.slice(pass, pass + 6);
-            console.log(slicedResult);
-            pass += 6;
-            return slicedResult;
+
+
+
         }
+
         sliceResult();
-        setInterval (() => {
+        setInterval(() => {
             sliceResult();
             writeToDom();
-        }, 3000);
+        }, 30000);
         // ((el, idx) => {
         //     if (moment(el['Start Time'], 'HH mm ss').isAfter(moment(now).subtract(165, 'm')) && moment(el['End Time'], 'HH mm ss').isBefore(moment(now).add(165, 'm')) && moment(el['Date'], 'YYYY-MM-DD').isSame(moment('2019-07-24'))) {
         //         return el;
@@ -157,13 +164,14 @@ fetch('../dist/csv/convertcsv.json')
 
             // Write session title to DOM
             sessions.forEach(function (e, i) {
-                e.innerHTML = `${slicedResult[i]['Session Name']}`;
+                e.innerHTML = (slicedResult[i]['Session Name'] != null) ? `${slicedResult[i]['Session Name']}` : "";
             });
 
             // Write topics to DOM
             tracks.forEach(function (e, i) {
                 let track = ((slicedResult[i]['Session Track'] != "") ? `${slicedResult[i]['Session Track'].toLowerCase().replace(/\s|\//g,"-")}` : "no-track");
-                e.classList.add(track);
+                e.className = '';
+                e.className = "track " + track;
             })
 
             // Write venue to DOM
