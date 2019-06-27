@@ -33,7 +33,7 @@ const sessTime = document.querySelectorAll('.session-time');
 let program = [];
 
 // Get the program
-fetch('./csv/convertcsv.json')
+fetch('./dist/csv/convertcsv.json')
     .then((response) => response.json())
     .then((responseJSON) => {
 

@@ -6,20 +6,27 @@ html,
 body,
 ul,
 ol {
-  margin:  0;
+  margin: 0;
   padding: 0;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 // General Styles
+
 html {
-    background: $black;
-    color: $white;
-    font-family: $sans;
+  background: $black;
+  color: $white;
+  font-family: $sans;
+  font-size: 1em;
+}
+
+@media screen and (min-width: 768px) {
+  html {
     font-size: calc(1em + .25vw);
+  }
 }
 
 
@@ -29,9 +36,3 @@ html {
 @import 'header';
 @import 'body';
 @import 'footer';
-
-
-
-
-
-
