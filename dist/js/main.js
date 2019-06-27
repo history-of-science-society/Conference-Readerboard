@@ -4,30 +4,121 @@
 // let now = moment.tz('Europe/Amsterdam');
 let now = moment();
 
-
-// function timeSwitch() {
-
-//     (now = moment()) ? now = moment.tz('Europe/Amsterdam'): now = moment();
-//     setTimeout(timeSwitch, 500);
-
-// }
-
-// if (moment().isSame(moment.tz('Europe/Amsterdam'))) {
-//     now = moment();
-// } else {
-//     console.log('switcher');
-//     timeSwitch();
-// }
-
-
+const endOfMeeting = [{
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}, {
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}, {
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}, {
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}, {
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}, {
+    "Session Id": 17,
+    "Type": "Session",
+    "Session Name": "That's a wrap!",
+    "Date": "",
+    "Start Time": "",
+    "End Time": "",
+    "Description": "",
+    "Session Track": "",
+    "Venue": "",
+    "Format": "",
+    "Abstract": "",
+    "Additional Abstract": "",
+    "Speakers": "",
+    "Moderators": "",
+    "Attendees": "",
+    "Capacity": 0,
+    "Likes": 0
+}];
 
 //Get DOM
 const sessions = document.querySelectorAll('.session-title');
 const tracks = document.querySelectorAll('.track');
 const locations = document.querySelectorAll('.location');
 const sessTime = document.querySelectorAll('.session-time');
-
-
 
 // Data
 let program = [];
@@ -67,7 +158,7 @@ fetch('./dist/csv/convertcsv.json')
 
 
         program.sort(compareProgram);
-        console.log(program);
+
 
 
         // Unique filter ->
@@ -111,15 +202,29 @@ fetch('./dist/csv/convertcsv.json')
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
             const dateNow = moment('2019-07-24');
 
-            if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
+
+            if (moment(now).isAfter(moment('18:00', 'HH:mm')) && moment(now).isBefore(moment('2019-07-28'))) {
+                if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd'))) {
+                    return sess
+                }
+            } else if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
                 return sess;
             }
+
         }
+
+
         //Filter results based on time and date
-        let filteredResult = result.filter(sess => filterProgram(sess));
+        let filteredResult = [];
+        if (moment(now).isAfter(moment('13:00', 'HH:mm')) && moment(now).isSameOrAfter(moment('2019-07-27'))) {
+            filteredResult = endOfMeeting;
+        } else {
+            filteredResult = result.filter(sess => filterProgram(sess));
+        }
+
 
         let filteredLength = filteredResult.length;
-        console.log(filteredLength, filteredResult);
+
         let pass = 0;
         let slicedResult = [];
 
@@ -188,7 +293,7 @@ fetch('./dist/csv/convertcsv.json')
             })
 
 
-            console.log('writeToDom ran');
+
         }
 
 
@@ -287,14 +392,14 @@ stc.forEach((e, i) => {
 
 function fadeOut() {
     stc.forEach((e, i) => {
-        console.log(`'fadeout'`);
+
         setTimeout(() => e.style.opacity = 0, i * 100);
     });
 }
 
 function fadeIn() {
     stc.forEach((e, i) => {
-        console.log('in');
+
         setTimeout(() => e.style.opacity = 1, i * 100);
     });
 }
@@ -388,7 +493,7 @@ function getForecast() {
 
     // Set timeout to return forecast every hour
     setTimeout(getForecast, 3600000);
-    console.log('Forecast got')
+
 }
 
 // Get forecast on page load

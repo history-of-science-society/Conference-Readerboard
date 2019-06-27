@@ -13,7 +13,11 @@ html {
   background: #020f16;
   color: #fefffe;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", "Segoe UI", sans-serif;
-  font-size: 1em; }
+  font-size: 15px; }
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  html {
+    font-size: 16px; } }
 
 @media screen and (min-width: 768px) {
   html {
@@ -45,6 +49,7 @@ html {
   font-size: 2em;
   font-weight: 700;
   font-family: 'Adobe Garamond Pro', Garamond, Georgia, serif;
+  line-height: 1;
   letter-spacing: 2px;
   transform: translateY(3px); }
 
