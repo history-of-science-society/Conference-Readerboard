@@ -105,7 +105,7 @@ fetch('./csv/convertcsv.json')
         function filterProgram(sess) {
 
             const earlierThanNow = moment(now).subtract(180, 'm');
-            const laterThanNow = moment(now).add(30, 'm');
+            const laterThanNow = moment(now).add(180, 'm');
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
