@@ -131,6 +131,7 @@ fetch('./csv/convertcsv.json')
                 pass += 6;
 
                 return slicedResult;
+
             } else {
 
                 let firstSlice = filteredResult.slice(pass, filteredLength);
@@ -142,21 +143,18 @@ fetch('./csv/convertcsv.json')
                 pass = 6 - (filteredLength - pass);
                 return slicedResult;
             }
-
-
-
         }
 
         sliceResult();
+
         setInterval(() => {
+            fadeEffect();
             sliceResult();
-            writeToDom();
-        }, 10000);
-        // ((el, idx) => {
-        //     if (moment(el['Start Time'], 'HH mm ss').isAfter(moment(now).subtract(165, 'm')) && moment(el['End Time'], 'HH mm ss').isBefore(moment(now).add(165, 'm')) && moment(el['Date'], 'YYYY-MM-DD').isSame(moment('2019-07-24'))) {
-        //         return el;
-        //     }
-        // })
+            setTimeout(writeToDom, 450);
+            // writeToDom();
+        }, 5000);
+        // Set this number higher for production
+
 
 
         // Write content to DOM
@@ -188,16 +186,23 @@ fetch('./csv/convertcsv.json')
                 const sessTime = `${sessStart}&ndash;${sessEnd}`;
                 e.innerHTML = sessTime;
             })
+
+
+            console.log('writeToDom ran');
         }
+
+
+
+
         writeToDom();
 
-
-
-
+        function fadeEffect() {
+            fadeOut();
+            setTimeout(fadeIn, 500);
+        }
     })
 
 // Set time in the DOM
-
 function setTime() {
     // Define clocks
     const oneClck = "🕐";
@@ -274,13 +279,28 @@ setTime();
 
 
 // Transition in the elements
-let slideIn = document.querySelectorAll('.session-title-container');
+let stc = document.querySelectorAll('.session-title-container');
 
-
-
-slideIn.forEach((e, i) => {
+stc.forEach((e, i) => {
     setTimeout(() => e.classList.add('stc-active'), i * 250);
 });
+
+function fadeOut() {
+    stc.forEach((e, i) => {
+        console.log(`'fadeout'`);
+        setTimeout(() => e.style.opacity = 0, i * 100);
+    });
+}
+
+function fadeIn() {
+    stc.forEach((e, i) => {
+        console.log('in');
+        setTimeout(() => e.style.opacity = 1, i * 100);
+    });
+}
+
+
+
 
 // Weather
 function icon(weatherID) {
