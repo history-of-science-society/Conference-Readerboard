@@ -119,7 +119,7 @@ fetch('./csv/convertcsv.json')
         let filteredResult = result.filter(sess => filterProgram(sess));
 
         let filteredLength = filteredResult.length;
-
+        console.log(filteredLength, filteredResult);
         let pass = 0;
         let slicedResult = [];
 
