@@ -151,7 +151,7 @@ fetch('./csv/convertcsv.json')
         setInterval(() => {
             sliceResult();
             writeToDom();
-        }, 30000);
+        }, 10000);
         // ((el, idx) => {
         //     if (moment(el['Start Time'], 'HH mm ss').isAfter(moment(now).subtract(165, 'm')) && moment(el['End Time'], 'HH mm ss').isBefore(moment(now).add(165, 'm')) && moment(el['Date'], 'YYYY-MM-DD').isSame(moment('2019-07-24'))) {
         //         return el;
