@@ -326,10 +326,10 @@ function setTime() {
     const timeDiv = document.querySelector('.time > p');
     const dateDiv = document.querySelector('.date > p');
 
-    let date = now.format('DD MMM YYYY');
-    let time = now.format('HH:mm');
+    let date = moment().format('DD MMM YYYY');
+    let time = moment().format('HH:mm');
     let hourIcon;
-    let hour = parseInt(now.format('hh'));
+    let hour = parseInt(time.format('hh'));
 
     switch (hour) {
         case 0:
