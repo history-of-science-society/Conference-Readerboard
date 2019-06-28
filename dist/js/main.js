@@ -311,6 +311,7 @@ fetch('./dist/csv/convertcsv.json')
 function setTime() {
     // Define clocks
     const oneClck = "🕐";
+    const oneThirtyClck = "🕜";
     const twoClck = "🕑";
     const threeClck = "🕒";
     const fourClck = "🕓";
@@ -322,6 +323,7 @@ function setTime() {
     const tenClck = "🕙";
     const elevenClck = "🕚";
     const twelveClck = "🕛";
+    const twelveThirtyClck = "🕧";
 
     const timeDiv = document.querySelector('.time > p');
     const dateDiv = document.querySelector('.date > p');
@@ -330,47 +332,57 @@ function setTime() {
     let time = moment().format('HH:mm');
     let hourIcon;
     let hour = parseInt(moment().format('hh'));
+    let minute = (parseInt(moment().format('mm')) > 29) ? true : false;
 
 
-    switch (hour) {
-        case 0:
+    switch (hour, minute) {
+        case 0, false:
             hourIcon = twelveClck;
             break;
-        case 1:
+        case 0, true:
+            hourIcon = twelveThirtyClck;
+            break;
+        case 1, false:
             hourIcon = oneClck;
             break;
-        case 2:
+        case 1, true:
+            hourIcon = oneThirtyClck;
+            break;
+        case 2, false:
             hourIcon = twoClck;
             break;
-        case 3:
+        case 3, false:
             hourIcon = threeClck;
             break;
-        case 4:
+        case 4, false:
             hourIcon = fourClck;
             break;
-        case 5:
+        case 5, false:
             hourIcon = fiveClck;
             break;
-        case 6:
+        case 6, false:
             hourIcon = sixClck;
             break;
-        case 7:
+        case 7, false:
             hourIcon = sevenClck;
             break;
-        case 8:
+        case 8, false:
             hourIcon = eightClck;
             break;
-        case 9:
+        case 9, false:
             hourIcon = nineClck;
             break;
-        case 10:
+        case 10, false:
             hourIcon = tenClck;
             break;
-        case 11:
+        case 11, false:
             hourIcon = elevenClck;
             break;
-        case 12:
+        case 12, false:
             hourIcon = twelveClck;
+            break;
+        case 12, true:
+            hourIcon = twelveThirtyClck;
     }
 
     // timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
@@ -502,22 +514,18 @@ getForecast();
 
 // Resize element
 //Need to alter for smaller viewports
-const header = document.querySelector('.header-container').offsetHeight;
-const container = document.querySelector('.container');
-const sessionContainer = document.querySelectorAll('.session-title-container');
 
-//Set initial size of container & items
-container.style.minHeight = `${window.innerHeight - header - 50}px`;
-sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
 
 // Resize container depending on window size
+function resizeWindow() {
+    const header = document.querySelector('.header-container').offsetHeight;
+    const container = document.querySelector('.container');
+    const sessionContainer = document.querySelectorAll('.session-title-container');
 
-if (window.innerWidth > 500) {
-    console.log('window > 500')
-    function resizeWindow() {
-        container.style.minHeight = `${window.innerHeight - header - 50}px`;
+        container.style.height = `${window.innerHeight - header - 50}px`;
         sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
-    }
 
-    window.onresize = resizeWindow;
 }
+
+resizeWindow();
+window.onresize = resizeWindow;
