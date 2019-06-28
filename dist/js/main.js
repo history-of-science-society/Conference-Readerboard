@@ -376,7 +376,7 @@ function setTime() {
     timeDiv.innerHTML = `${hourIcon}&nbsp;${time}`;
     dateDiv.innerHTML = `📅&nbsp;${date}`;
     console.log('Time Refreshed');
-    let interval = setTimeout(setTime, 500);
+    setTimeout(setTime, 500);
 }
 
 setTime();
@@ -510,9 +510,13 @@ container.style.minHeight = `${window.innerHeight - header - 50}px`;
 sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
 
 // Resize container depending on window size
-function resizeWindow() {
-    container.style.minHeight = `${window.innerHeight - header - 50}px`;
-    sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
-}
 
-window.onresize = resizeWindow;
+if (window.innerWidth > 500) {
+    console.log('window > 500')
+    function resizeWindow() {
+        container.style.minHeight = `${window.innerHeight - header - 50}px`;
+        sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
+    }
+
+    window.onresize = resizeWindow;
+}
