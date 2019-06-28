@@ -375,7 +375,7 @@ function setTime() {
     // timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
     timeDiv.innerHTML = `${hourIcon}&nbsp;${time}`;
     dateDiv.innerHTML = `📅&nbsp;${date}`;
-
+    console.log('Time Refreshed');
     let interval = setTimeout(setTime, 500);
 }
 
