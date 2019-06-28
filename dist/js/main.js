@@ -329,7 +329,8 @@ function setTime() {
     let date = moment().format('DD MMM YYYY');
     let time = moment().format('HH:mm');
     let hourIcon;
-    let hour = parseInt(time.format('hh'));
+    let hour = parseInt(moment().format('hh'));
+
 
     switch (hour) {
         case 0:
@@ -375,7 +376,7 @@ function setTime() {
     // timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
     timeDiv.innerHTML = `${hourIcon}&nbsp;${time}`;
     dateDiv.innerHTML = `📅&nbsp;${date}`;
-    console.log('Time Refreshed');
+
     setTimeout(setTime, 500);
 }
 
