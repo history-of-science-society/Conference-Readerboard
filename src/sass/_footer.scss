@@ -3,7 +3,8 @@
     display: flex;
 
     flex: 1;
-    height: 50px;
+    flex-wrap: wrap;
+    // height: 50px;
     justify-content: space-between;
 
     padding: 0 15px;

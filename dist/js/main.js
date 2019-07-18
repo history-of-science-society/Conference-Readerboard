@@ -3,7 +3,6 @@
 // Time check
 // let now = moment.tz('Europe/Amsterdam');
 // let now = moment();
-let now = moment('2019-07-23');
 
 const endOfMeeting = [{
     "Session Id": 17,
@@ -131,9 +130,7 @@ fetch('./dist/csv/convertcsv.json')
 
         program.push(...responseJSON);
 
-
         // Sort by start time
-        // Will have to add sort by date first
 
         function compareProgram(a, b) {
             if (a.Date > b.Date) {
@@ -156,11 +153,7 @@ fetch('./dist/csv/convertcsv.json')
             return 0;
         }
 
-
-
         program.sort(compareProgram);
-
-
 
         // Unique filter ->
         function genTopics(value, index, self) {
@@ -189,7 +182,25 @@ fetch('./dist/csv/convertcsv.json')
             // Get DOM Elements
             let todaysProgram = program.filter(
                 el => {
-                    return el['Date'] == now.format('YYYY-MM-DD');
+
+
+
+                    // Need to update when we go live -->
+
+
+
+
+
+                    return el['Date'] == moment('2019-07-23').format('YYYY-MM-DD');
+                    // return el['Date'] == moment().format('YYYY-MM-DD');
+
+
+
+
+
+
+
+
                 }
             )
 
@@ -203,6 +214,7 @@ fetch('./dist/csv/convertcsv.json')
             let endReg = moment(foundReg['End Time'], 'HH:mm:ss');
 
             // Check whether current time is between start and close times
+            // Add relevant class names to DOM
             if (moment().isBetween(startReg, endReg)) {
                 regDom.classList.remove('closed');
                 regDom.classList.add('open');
@@ -224,7 +236,15 @@ fetch('./dist/csv/convertcsv.json')
         }
 
         // Run the function
-        writeOpenEvents();
+        function conferenceStarted() {
+            if (moment().isBetween('2019-07-23', '2019-07-27')) {
+                writeOpenEvents();
+            }
+
+            setTimeout(conferenceStarted, 3600000);
+        }
+
+        conferenceStarted();
 
         // Filter out constant events
         function removeEvents(v) {
@@ -243,15 +263,15 @@ fetch('./dist/csv/convertcsv.json')
 
         function filterProgram(sess) {
 
-            const earlierThanNow = moment(now).subtract(165, 'm');
-            const laterThanNow = moment(now).add(330, 'm');
+            const earlierThanNow = moment().subtract(165, 'm');
+            const laterThanNow = moment().add(330, 'm');
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
             const dateNow = moment('2019-07-24');
 
 
-            if (moment(now).isAfter(moment('18:00', 'HH:mm')) && moment(now).isBefore(moment('2019-07-28'))) {
+            if (moment().isAfter(moment('18:00', 'HH:mm')) && moment().isBefore(moment('2019-07-28'))) {
                 if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd'))) {
                     return sess
                 }
@@ -264,7 +284,7 @@ fetch('./dist/csv/convertcsv.json')
 
         //Filter results based on time and date
         let filteredResult = [];
-        if (moment(now).isAfter(moment('13:00', 'HH:mm')) && moment(now).isSameOrAfter(moment('2019-07-27'))) {
+        if (moment().isAfter(moment('13:00', 'HH:mm')) && moment().isSameOrAfter(moment('2019-07-27'))) {
             filteredResult = endOfMeeting;
         } else {
             filteredResult = result.filter(sess => filterProgram(sess));
@@ -343,9 +363,6 @@ fetch('./dist/csv/convertcsv.json')
 
 
         }
-
-
-
 
         writeToDom();
 
@@ -610,8 +627,15 @@ function resizeWindow() {
     const container = document.querySelector('.container');
     const sessionContainer = document.querySelectorAll('.session-title-container');
 
-    container.style.height = `${window.innerHeight - header - 50}px`;
-    sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
+    if (window.innerWidth > 1280) {
+        console.log(window.innerWidth);
+        container.style.height = `${window.innerHeight - header - 50}px`;
+        sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
+    } else {
+        container.style.height = 'auto';
+        sessionContainer.forEach(row => row.style.height = 'auto');
+    }
+
 
 }
 

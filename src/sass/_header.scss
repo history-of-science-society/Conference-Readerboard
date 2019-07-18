@@ -52,10 +52,11 @@
     align-content: center;
     align-items: center;
     background: $dark-blue;
+    flex-wrap: wrap;
     display: flex;
-    height: 90px;
+    // height: 90px;
     justify-content: center;
-    padding: 1em 0;
+    padding: .5em;
 
     font-size: 1em;
     transition: all 1s;
@@ -63,13 +64,16 @@
         flex: 2;
         margin-left: 10px;
     }
+    &>*{
+        margin: 15px 5px;
+    }
 }
 
 .date,
 .time,
 .weather {
 
-    margin-right: 10px;
+
     font-size: 1.2em;
     font-weight: 300;
 

@@ -28,6 +28,7 @@
     align-items: center;
     display: flex;
     height: auto;
+    // flex-wrap: wrap;
     padding: 5px 10px;
 
     color: $black;
@@ -36,6 +37,9 @@
     opacity: 0;
     transform: translateX(-100px);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    &>* {
+        margin: 15px 5px;
+    }
 }
 
 .session-1 {
@@ -80,6 +84,9 @@
     font-size: 1em;
     opacity: 1;
     transform: none;
+    &>* {
+        margin: 15px 5px;
+    }
 
 
 }
@@ -87,7 +94,7 @@
 .title-explainer,
 .session-title {
     flex: 75%;
-    margin: 0 5px 0 0;
+    // margin: 0 5px 0 0;
 }
 
 .session-title {
@@ -106,7 +113,7 @@
 
 
 .explainer>p {
-    margin: 0;
+    // margin: 0;
     font-size: smaller;
 }
 
@@ -116,10 +123,10 @@
 
 }
 
-.explainer>.time-explainer,
-.session-time {
-    margin-right: 5px;
-}
+// .explainer>.time-explainer,
+// .session-time {
+//     // margin-right: 5px;
+// }
 
 // Define topic classes
 %text-center {

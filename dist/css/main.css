@@ -64,20 +64,21 @@ html {
   align-content: center;
   align-items: center;
   background: #0b3954;
+  flex-wrap: wrap;
   display: flex;
-  height: 90px;
   justify-content: center;
-  padding: 1em 0;
+  padding: .5em;
   font-size: 1em;
   transition: all 1s; }
   .time-container h2 {
     flex: 2;
     margin-left: 10px; }
+  .time-container > * {
+    margin: 15px 5px; }
 
 .date,
 .time,
 .weather {
-  margin-right: 10px;
   font-size: 1.2em;
   font-weight: 300; }
   .date > p,
@@ -112,6 +113,8 @@ html {
   opacity: 0;
   transform: translateX(-100px);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+  .session-title-container > *, .explainer > * {
+    margin: 15px 5px; }
 
 .session-1 {
   background: #bfd7ea; }
@@ -143,11 +146,12 @@ html {
   font-size: 1em;
   opacity: 1;
   transform: none; }
+  .explainer > * {
+    margin: 15px 5px; }
 
 .title-explainer,
 .session-title {
-  flex: 75%;
-  margin: 0 5px 0 0; }
+  flex: 75%; }
 
 .session-title {
   font-weight: 700; }
@@ -161,16 +165,11 @@ html {
   text-align: right; }
 
 .explainer > p {
-  margin: 0;
   font-size: smaller; }
 
 .topic-explainer,
 .track {
   flex: 5%; }
-
-.explainer > .time-explainer,
-.session-time {
-  margin-right: 5px; }
 
 .aspects-of-scientific-practice-organization:before, .biology:before, .chemistry:before, .earth-and-environmental-sciences:before, .mathematics:before, .medicine-and-health:before, .physical-sciences:before, .social-sciences:before, .technology:before, .thematic-approaches-to-the-study-of-science:before, .theoretical-approaches-to-the-study-of-science:before, .tools-for-historians-of-science:before {
   text-align: center; }
@@ -214,7 +213,7 @@ html {
 .info-container {
   display: flex;
   flex: 1;
-  height: 50px;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 15px;
   background: #061d2a;
