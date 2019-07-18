@@ -2,7 +2,8 @@
 
 // Time check
 // let now = moment.tz('Europe/Amsterdam');
-let now = moment();
+// let now = moment();
+let now = moment('2019-07-23');
 
 const endOfMeeting = [{
     "Session Id": 17,
@@ -176,7 +177,54 @@ fetch('./dist/csv/convertcsv.json')
         // Print unique strings to console for copying to stylesheet
         console.table(uniqueTracks);
 
+        //Write reg, book exhibit, cafe open time to DOM
+        function writeOpenEvents() {
 
+            //Define variables
+            const reg = 'Registration';
+            const regDom = document.getElementById('reg');
+            const cafe = document.getElementById('cafe');
+            const exhibit = document.getElementById('exhibit');
+
+            // Get DOM Elements
+            let todaysProgram = program.filter(
+                el => {
+                    return el['Date'] == now.format('YYYY-MM-DD');
+                }
+            )
+
+            // Find the first instance of the item for the day
+            let foundReg = todaysProgram.find(element => {
+                return element['Session Name'] == reg;
+            });
+
+            // Format time
+            let startReg = moment(foundReg['Start Time'], 'HH:mm:ss');
+            let endReg = moment(foundReg['End Time'], 'HH:mm:ss');
+
+            // Check whether current time is between start and close times
+            if (moment().isBetween(startReg, endReg)) {
+                regDom.classList.remove('closed');
+                regDom.classList.add('open');
+                cafe.classList.remove('closed');
+                cafe.classList.add('open');
+                exhibit.classList.remove('closed');
+                exhibit.classList.add('open');
+            } else {
+                regDom.classList.remove('open');
+                regDom.classList.add('closed');
+                cafe.classList.remove('open');
+                cafe.classList.add('closed');
+                exhibit.classList.remove('open');
+                exhibit.classList.add('closed');
+            }
+
+            // Run this every hour
+            setTimeout(writeOpenEvents, 3600000);
+        }
+
+        // Run the function
+        writeOpenEvents();
 
         // Filter out constant events
         function removeEvents(v) {
@@ -313,15 +361,25 @@ function setTime() {
     const oneClck = "🕐";
     const oneThirtyClck = "🕜";
     const twoClck = "🕑";
+    const twoThirtyClck = "🕑";
     const threeClck = "🕒";
+    const threeThirtyClck = "🕞";
     const fourClck = "🕓";
+    const fourThirtyClck = "🕟";
     const fiveClck = "🕔";
+    const fiveThirtyClck = "🕠";
     const sixClck = "🕕";
+    const sixThirtyClck = "🕡";
     const sevenClck = "🕖";
+    const sevenThirtyClck = "🕢";
     const eightClck = "🕗";
+    const eightThirtyClck = "🕣";
     const nineClck = "🕘";
+    const nineThirtyClck = "🕤";
     const tenClck = "🕙";
+    const tenThirtyClck = "🕥";
     const elevenClck = "🕚";
+    const elevenThirtyClck = "🕦";
     const twelveClck = "🕛";
     const twelveThirtyClck = "🕧";
 
@@ -351,32 +409,62 @@ function setTime() {
         case 2, false:
             hourIcon = twoClck;
             break;
+        case 2, true:
+            hourIcon = twoThirtyClck;
+            break;
         case 3, false:
             hourIcon = threeClck;
+            break;
+        case 3, true:
+            hourIcon = threeThirtyClck;
             break;
         case 4, false:
             hourIcon = fourClck;
             break;
+        case 4, true:
+            hourIcon = fourThirtyClck;
+            break;
         case 5, false:
             hourIcon = fiveClck;
+            break;
+        case 5, true:
+            hourIcon = fiveThirtyClck;
             break;
         case 6, false:
             hourIcon = sixClck;
             break;
+        case 6, true:
+            hourIcon = sixThirtyClck;
+            break;
         case 7, false:
             hourIcon = sevenClck;
+            break;
+        case 7, true:
+            hourIcon = sevenThirtyClck;
             break;
         case 8, false:
             hourIcon = eightClck;
             break;
+        case 8, true:
+            hourIcon = eightThirtyClck;
+            break;
         case 9, false:
             hourIcon = nineClck;
+            break;
+        case 9, true:
+            hourIcon = nineThirtyClck;
             break;
         case 10, false:
             hourIcon = tenClck;
             break;
+        case 10, true:
+            hourIcon = tenThirtyClck;
+            break;
         case 11, false:
             hourIcon = elevenClck;
+            break;
+        case 11, true:
+            hourIcon = elevenThirtyClck;
             break;
         case 12, false:
             hourIcon = twelveClck;
@@ -522,8 +610,8 @@ function resizeWindow() {
     const container = document.querySelector('.container');
     const sessionContainer = document.querySelectorAll('.session-title-container');
 
-        container.style.height = `${window.innerHeight - header - 50}px`;
-        sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
+    container.style.height = `${window.innerHeight - header - 50}px`;
+    sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
 
 }
 
