@@ -167,9 +167,6 @@ fetch('./dist/csv/convertcsv.json')
 
         let uniqueTracks = trackList.filter(genTopics).map(x => x.toLowerCase().replace(/\s|\//g, "-"));
 
-        // Print unique strings to console for copying to stylesheet
-        console.table(uniqueTracks);
-
         //Write reg, book exhibit, cafe open time to DOM
         function writeOpenEvents() {
 
@@ -325,7 +322,7 @@ fetch('./dist/csv/convertcsv.json')
             sliceResult();
             setTimeout(writeToDom, 450);
             // writeToDom();
-        }, 5000);
+        }, 50000);
         // Set this number higher for production
 
 
@@ -650,7 +647,7 @@ function resizeWindow() {
     const sessionContainer = document.querySelectorAll('.session-title-container');
 
     if (window.innerWidth > 1280) {
-        console.log(window.innerWidth);
+
         container.style.height = `${window.innerHeight - header - 50}px`;
         sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
     } else {
