@@ -410,87 +410,109 @@ function setTime() {
     let minute = (parseInt(moment().format('mm')) > 29) ? true : false;
 
 
-    switch (hour, minute) {
-        case 0, false:
-            hourIcon = twelveClck;
+    switch (hour) {
+        case 0:
+            hourIcon = `twelve${minute}Clck`;
             break;
-        case 0, true:
-            hourIcon = twelveThirtyClck;
+
+        case 1:
+            if (minute) {
+                hourIcon = oneThirtyClck;
+            } else {
+                hourIcon = oneClck;
+            }
             break;
-        case 1, false:
-            hourIcon = oneClck;
+
+        case 2:
+            if (minute) {
+                hourIcon = twoThirtyClck;
+            } else {
+                hourIcon = twoClck;
+            }
             break;
-        case 1, true:
-            hourIcon = oneThirtyClck;
+
+        case 3:
+            if (minute) {
+                hourIcon = threeThirtyClck;
+            } else {
+                hourIcon = threeClck;
+            }
             break;
-        case 2, false:
-            hourIcon = twoClck;
+
+        case 4:
+            if (minute) {
+                hourIcon = fourThirtyClck;
+            } else {
+                hourIcon = fourClck;
+            }
             break;
-        case 2, true:
-            hourIcon = twoThirtyClck;
+
+        case 5:
+            if (minute) {
+                hourIcon = fiveThirtyClck;
+            } else {
+                hourIcon = fiveClck;
+            }
             break;
-        case 3, false:
-            hourIcon = threeClck;
+
+        case 6:
+            if (minute) {
+                hourIcon = sixThirtyClck;
+            } else {
+                hourIcon = sixClck;
+            }
             break;
-        case 3, true:
-            hourIcon = threeThirtyClck;
+
+        case 7:
+            if (minute) {
+                hourIcon = sevenThirtyClck;
+            } else {
+                hourIcon = sevenClck;
+            }
             break;
-        case 4, false:
-            hourIcon = fourClck;
+
+        case 8:
+            if (minute) {
+                hourIcon = eightThirtyClck;
+            } else {
+                hourIcon = eightClck;
+            }
             break;
-        case 4, true:
-            hourIcon = fourThirtyClck;
+
+        case 9:
+            if (minute) {
+                hourIcon = nineThirtyClck;
+            } else {
+                hourIcon = nineClck;
+            }
             break;
-        case 5, false:
-            hourIcon = fiveClck;
+
+        case 10:
+            if (minute) {
+                hourIcon = tenThirtyClck;
+            } else {
+                hourIcon = tenClck;
+            }
             break;
-        case 5, true:
-            hourIcon = fiveThirtyClck;
+
+        case 11:
+            if (minute) {
+                hourIcon = elevenThirtyClck;
+            } else {
+                hourIcon = elevenClck;
+            }
             break;
-        case 6, false:
-            hourIcon = sixClck;
+
+        case 12:
+            if (minute) {
+                hourIcon = twelveThirtyClck
+            } else {
+                hourIcon = twelveClck;
+            }
             break;
-        case 6, true:
-            hourIcon = sixThirtyClck;
-            break;
-        case 7, false:
-            hourIcon = sevenClck;
-            break;
-        case 7, true:
-            hourIcon = sevenThirtyClck;
-            break;
-        case 8, false:
-            hourIcon = eightClck;
-            break;
-        case 8, true:
-            hourIcon = eightThirtyClck;
-            break;
-        case 9, false:
-            hourIcon = nineClck;
-            break;
-        case 9, true:
-            hourIcon = nineThirtyClck;
-            break;
-        case 10, false:
-            hourIcon = tenClck;
-            break;
-        case 10, true:
-            hourIcon = tenThirtyClck;
-            break;
-        case 11, false:
-            hourIcon = elevenClck;
-            break;
-        case 11, true:
-            hourIcon = elevenThirtyClck;
-            break;
-        case 12, false:
-            hourIcon = twelveClck;
-            break;
-        case 12, true:
-            hourIcon = twelveThirtyClck;
     }
 
-    // timeDiv.innerHTML = `${hourIcon}&nbsp;${hour}:${min}`;
+
     timeDiv.innerHTML = `${hourIcon}&nbsp;${time}`;
     dateDiv.innerHTML = `📅&nbsp;${date}`;
 
