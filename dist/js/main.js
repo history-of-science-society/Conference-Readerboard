@@ -642,14 +642,22 @@ getForecast();
 
 // Resize container depending on window size
 function resizeWindow() {
-    const header = document.querySelector('.header-container').offsetHeight;
     const container = document.querySelector('.container');
     const sessionContainer = document.querySelectorAll('.session-title-container');
+    const header = document.querySelector('.header-container').offsetHeight;
+    const footer = document.querySelector('.info-container').offsetHeight;
+    const explainer = document.querySelector('.explainer').offsetHeight;
+    const timeContainer = document.querySelector('.time-container').offsetHeight;
+    const combo = header + footer + explainer + timeContainer + 50;
 
-    if (window.innerWidth > 1280) {
+    console.log(header, footer, explainer, timeContainer, combo);
+
+    if (window.innerWidth > 1280 && window.innerHeight > 500) {
+
 
         container.style.height = `${window.innerHeight - header - 50}px`;
-        sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - header - 240)/6}px`);
+
+        sessionContainer.forEach(row => row.style.height = `${(window.innerHeight - combo)/6}px`);
     } else {
         container.style.height = 'auto';
         sessionContainer.forEach(row => row.style.height = 'auto');

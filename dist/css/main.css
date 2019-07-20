@@ -13,15 +13,7 @@ html {
   background: #020f16;
   color: #fefffe;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", "Segoe UI", sans-serif;
-  font-size: 15px; }
-
-@media screen and (min-width: 480px) and (max-width: 767px) {
-  html {
-    font-size: 16px; } }
-
-@media screen and (min-width: 768px) {
-  html {
-    font-size: calc(1em + .25vw); } }
+  font-size: 16px; }
 
 .header-container {
   align-items: center;
