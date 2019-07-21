@@ -45,7 +45,7 @@ html {
   text-decoration: none; }
   .brand-container > img {
     height: 2.5em;
-    margin-right: 5px; }
+    margin-right: 10px; }
 
 .brand {
   margin: 0;
@@ -53,8 +53,7 @@ html {
   font-size: 2em;
   font-weight: 700;
   font-family: 'Adobe Garamond Pro', Garamond, Georgia, serif;
-  line-height: 1;
-  letter-spacing: 2px; }
+  line-height: 1; }
 
 .meeting {
   margin: 0;
