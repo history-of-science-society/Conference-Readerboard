@@ -4,6 +4,8 @@
 // let now = moment.tz('Europe/Amsterdam');
 // let now = moment();
 
+
+
 const endOfMeeting = [{
     "Session Id": 17,
     "Type": "Session",
@@ -179,25 +181,7 @@ fetch('./dist/csv/convertcsv.json')
             // Get DOM Elements
             let todaysProgram = program.filter(
                 el => {
-
-
-
-                    // Need to update when we go live -->
-
-
-
-
-
-                    return el['Date'] == moment('2019-07-23').format('YYYY-MM-DD');
-                    // return el['Date'] == moment().format('YYYY-MM-DD');
-
-
-
-
-
-
-
-
+                    return el['Date'] == moment().format('YYYY-MM-DD');
                 }
             )
 
@@ -265,14 +249,17 @@ fetch('./dist/csv/convertcsv.json')
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
-            const dateNow = moment('2019-07-24');
+            const dateNow = moment();
+            const upcomingHeader = document.querySelector('.time-container>h2');
 
 
-            if (moment().isAfter(moment('18:00', 'HH:mm')) && moment().isBefore(moment('2019-07-28'))) {
+            if (moment().isAfter(moment('19:00', 'HH:mm')) && moment().isBefore(moment('2019-07-28'))) {
                 if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd'))) {
+                    upcomingHeader.classList.add('tomorrow');
                     return sess
                 }
             } else if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
+                upcomingHeader.classList.remove('tomorrow');
                 return sess;
             }
 
@@ -670,4 +657,3 @@ resizeWindow();
 window.onresize = resizeWindow;
 
 
-console.log(moment().format("HH:mm"));
