@@ -263,17 +263,25 @@ fetch('./dist/csv/convertcsv.json')
                 return sess;
             }
 
+
         }
 
 
         //Filter results based on time and date
         let filteredResult = [];
-        if (moment().isAfter(moment('13:00', 'HH:mm')) && moment().isSameOrAfter(moment('2019-07-27'))) {
-            filteredResult = endOfMeeting;
-        } else {
-            filteredResult = result.filter(sess => filterProgram(sess));
+
+        function programFilter() {
+
+            if (moment().isAfter(moment('13:00', 'HH:mm')) && moment().isSameOrAfter(moment('2019-07-27'))) {
+                filteredResult = endOfMeeting;
+            } else {
+                filteredResult = result.filter(sess => filterProgram(sess));
+            }
+
+            setTimeout(programFilter, 60000);
         }
 
+        programFilter();
 
         let filteredLength = filteredResult.length;
 
@@ -655,5 +663,3 @@ function resizeWindow() {
 
 resizeWindow();
 window.onresize = resizeWindow;
-
-
