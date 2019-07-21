@@ -670,4 +670,4 @@ resizeWindow();
 window.onresize = resizeWindow;
 
 
-console.log(moment().format("HH:mm"))
+console.log(moment().format("HH:mm"));
