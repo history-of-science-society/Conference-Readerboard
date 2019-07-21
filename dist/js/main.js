@@ -650,7 +650,7 @@ function resizeWindow() {
     const timeContainer = document.querySelector('.time-container').offsetHeight;
     const combo = header + footer + explainer + timeContainer + 50;
 
-    console.log(header, footer, explainer, timeContainer, combo);
+
 
     if (window.innerWidth > 1280 && window.innerHeight > 500) {
 
@@ -668,3 +668,6 @@ function resizeWindow() {
 
 resizeWindow();
 window.onresize = resizeWindow;
+
+
+console.log(moment().format("HH:mm"))
