@@ -249,7 +249,7 @@ fetch('./dist/csv/convertcsv.json')
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
-            const dateNow = moment();
+            const dateNow = moment().format('YYYY-MM-DD');
             const upcomingHeader = document.querySelector('.time-container>h2');
 
 
