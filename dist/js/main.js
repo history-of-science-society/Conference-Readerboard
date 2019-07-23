@@ -249,12 +249,13 @@ fetch('./dist/csv/convertcsv.json')
             const startTime = moment(sess['Start Time'], 'HH mm ss');
             const endTime = moment(sess['End Time'], 'HH mm ss');
             const sessDate = moment(sess['Date'], 'YYYY-MM-DD');
-            const dateNow = moment().format('YYYY-MM-DD');
+            const dateNow = moment();
+
             const upcomingHeader = document.querySelector('.time-container>h2');
 
 
             if (moment().isAfter(moment('19:00', 'HH:mm')) && moment().isBefore(moment('2019-07-28'))) {
-                if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd'))) {
+                if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd').format('YYYY-MM-DD'))) {
                     upcomingHeader.classList.add('tomorrow');
                     return sess
                 }
