@@ -259,8 +259,10 @@ fetch('./dist/csv/convertcsv.json')
                     upcomingHeader.classList.add('tomorrow');
                     return sess
                 }
-            } else (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
+            } else if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
                 upcomingHeader.classList.remove('tomorrow');
+                return sess;
+            } else {
                 return sess;
             }
 
