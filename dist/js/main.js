@@ -254,17 +254,20 @@ fetch('./dist/csv/convertcsv.json')
             const upcomingHeader = document.querySelector('.time-container>h2');
 
 
+
             if (moment().isAfter(moment('19:00', 'HH:mm')) && moment().isBefore(moment('2019-07-28'))) {
                 if (endTime.isBefore(moment('12:00', 'HH:mm')) && sessDate.isSame(dateNow.add(1, 'd').format('YYYY-MM-DD'))) {
                     upcomingHeader.classList.add('tomorrow');
                     return sess
                 }
-            } else if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow)) {
+            } else if (startTime.isAfter(earlierThanNow) && endTime.isBefore(laterThanNow) && sessDate.isSame(dateNow.format('YYYY-MM-DD'))) {
                 upcomingHeader.classList.remove('tomorrow');
-                return sess;
-            } else {
+
                 return sess;
             }
+            // else {
+            //     return sess;
+            // }
 
 
         }
