@@ -298,9 +298,11 @@ fetch('./dist/csv/convertcsv.json')
 
             if (pass + 6 <= filteredLength) {
 
+
+
                 slicedResult = filteredResult.slice(pass, pass + 6);
                 pass += 6;
-
+                console.log('<6', slicedResult, filteredLength);
                 return slicedResult;
 
             } else {
@@ -312,6 +314,7 @@ fetch('./dist/csv/convertcsv.json')
                 slicedResult = [...firstSlice, ...secondSlice];
 
                 pass = 6 - (filteredLength - pass);
+                console.log('>6', slicedResult, filteredLength);
                 return slicedResult;
             }
         }
@@ -321,10 +324,10 @@ fetch('./dist/csv/convertcsv.json')
         setInterval(() => {
             fadeEffect();
             sliceResult();
-            setTimeout(writeToDom, 450);
             // writeToDom();
-        }, 50000);
-        // Set this number higher for production
+            setTimeout(writeToDom, 450);
+        }, 10000);
+
 
 
 
