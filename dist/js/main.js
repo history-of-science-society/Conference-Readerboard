@@ -27,7 +27,7 @@ const endOfMeeting = [{
 }, {
     "Session Id": 17,
     "Type": "Session",
-    "Session Name": "That's a wrap!",
+    "Session Name": "Thank you for a great HSS 2019",
     "Date": "",
     "Start Time": "",
     "End Time": "",
@@ -45,7 +45,7 @@ const endOfMeeting = [{
 }, {
     "Session Id": 17,
     "Type": "Session",
-    "Session Name": "That's a wrap!",
+    "Session Name": "Thank you to all who Tweeted. See their stories: #hss19",
     "Date": "",
     "Start Time": "",
     "End Time": "",
@@ -63,7 +63,7 @@ const endOfMeeting = [{
 }, {
     "Session Id": 17,
     "Type": "Session",
-    "Session Name": "That's a wrap!",
+    "Session Name": "Visit hssonline.org in the coming weeks for photos and videos of the event",
     "Date": "",
     "Start Time": "",
     "End Time": "",
@@ -81,7 +81,7 @@ const endOfMeeting = [{
 }, {
     "Session Id": 17,
     "Type": "Session",
-    "Session Name": "That's a wrap!",
+    "Session Name": "Come to our next meeting: New Orleans (7-11 Oct 2020)",
     "Date": "",
     "Start Time": "",
     "End Time": "",
@@ -99,7 +99,7 @@ const endOfMeeting = [{
 }, {
     "Session Id": 17,
     "Type": "Session",
-    "Session Name": "That's a wrap!",
+    "Session Name": "Telling the Stories of Science",
     "Date": "",
     "Start Time": "",
     "End Time": "",
