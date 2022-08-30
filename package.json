@@ -20,6 +20,6 @@
     "gulp-uglify": "^3.0.2"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.26"
+    "moment-timezone": "^0.5.35"
   }
 }
